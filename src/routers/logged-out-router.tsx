@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { CreateAccount } from "../pages/create-account";
 import { Login } from "../pages/login";
+import { NotFound } from "../pages/404";
 
 export const LoggedOutRouter = () => {
   return (
@@ -10,8 +11,13 @@ export const LoggedOutRouter = () => {
         <Route path="/create-account">
           <CreateAccount />
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <Login />
+        </Route>
+        {/* 로그인 안된상태..즉 여기페이지에서 /다음 이상한거 입력하면
+        notfound 페이지로 가게된다! */}
+        <Route>
+          <NotFound />
         </Route>
       </Switch>
     </Router>

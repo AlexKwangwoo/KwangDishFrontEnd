@@ -1,3 +1,8 @@
+Tailwind의 screen은 640px부터 시작된다!
+아무것도 적지않으면 sm화면이라고 보면된다.. px-5면 작은사이즈일때 패딩5주고
+xl:px-0이면 화면 xl크기일때 패딩이 0이된다!
+(이유는 테일윈드는 모바일전용이기에 sm이 디폴트이다!)
+
 Tailwind 를 커스터마이징 하기위해 tailwind config파일이 필요하고!
 postCss 는 inline css가 보통 md-background~~
 이면 md는 테일윈드가 안붙여준다 그래서 postcss가 알아서 붙여줌!
@@ -42,3 +47,21 @@ login: loginMutation_login;
 export interface loginMutationVariables {
 loginInput: LoginInput;
 }
+
+로컬스토리지 이용!!
+localStorage.setItem(LOCALSTORAGE_TOKEN, token);
+LOCALSTORAGE_TOKEN이 "nuber-token"이므로 속성이름이nuber-token에다가
+토큰을 저장한다!
+
+const token = localStorage.getItem(LOCALSTORAGE_TOKEN);
+토큰사용!!
+
+hook 사용하여 api를 만들면
+훅쓸때마다 api를 사용해야만하나?(루트쪽에서
+api를 로드시셔서 props로 가져다 주면 몇번이고
+api를 안불러도 되는데.. 그대신 깊숙한 컴포넌트까지
+계속 끌고 내려가야하지만..)
+apollo 는 그래서 좋다. 왜냐하면 처음 api를 통해
+쿼리를 사용하게되면 캐시에 저장된다 그리고 다시 같은 api를
+사용할려는경우 apollo는 캐시부터 뒤져본다 그리고 있으면 api사용안하고
+캐시안에서 가져오고 없으면 api 를 로드해 원하는걸 가져온다!

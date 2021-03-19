@@ -2,10 +2,16 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { FormError } from "../components/form-error";
+import nuberLogo from "../images/logo.svg";
 import {
   loginMutation,
   loginMutationVariables,
 } from "../generated/loginMutation";
+import { Link } from "react-router-dom";
+import { Button } from "../components/button";
+import { Helmet } from "react-helmet-async";
+import { authTokenVar, isLoggedInVar } from "../apollo";
+import { LOCALSTORAGE_TOKEN } from "../constants";
 
 // # $는 변수라는뜻! 밑에줄은 FRONT 의 아폴로를 위한 것임
 // # mutation loginMutation($email: String!, $password: String!) {
@@ -26,11 +32,20 @@ const LOGIN_MUTATION = gql`
 interface ILoginForm {
   email: string;
   password: string;
-  resultError?: string;
 }
 
 export const Login = () => {
-  const { register, getValues, errors, handleSubmit } = useForm<ILoginForm>();
+  const {
+    register,
+    getValues,
+    errors,
+    handleSubmit,
+    formState,
+    //formState
+  } = useForm<ILoginForm>({
+    mode: "onChange",
+    //이것은 다 입력되면 isvalid가 true가 된다!
+  });
   // const [loginMutation, { loading, error, data }] = useMutation(LOGIN_MUTATION);
   //apollo codegen을 이용해 만들어진 타입으로 변수를 보호하자!
   const onCompleted = (data: loginMutation) => {
@@ -41,11 +56,19 @@ export const Login = () => {
       login: { ok, token },
       //로그인은 쿼리 이름임!! 결과가 쿼리이름이됨!
     } = data;
-    if (ok) {
-      console.log(token);
+    if (ok && token) {
+      localStorage.setItem(LOCALSTORAGE_TOKEN, token);
+      //LOCALSTORAGE_TOKEN이 "nuber-token"이므로 속성이름이nuber-token에다가
+      //토큰을 저장한다!
+      authTokenVar(token);
+      isLoggedInVar(true);
+      //아폴로.ts에서 우리가 만든 전역변수!! static이라 보면됨!
     }
   };
-  const [loginMutation, { data: loginMutationResult, loading }] = useMutation<
+  const [
+    loginMutationAAAA,
+    { data: loginMutationResult, loading },
+  ] = useMutation<
     //data안에 loginMutationResult이 있고 안에 쿼리 이름으로 결과가있음(login)
     loginMutation,
     loginMutationVariables
@@ -58,7 +81,7 @@ export const Login = () => {
   const onSubmit = () => {
     if (!loading) {
       const { email, password } = getValues();
-      loginMutation({
+      loginMutationAAAA({
         variables: {
           //변수 적용방법!!
           // email,
@@ -74,50 +97,71 @@ export const Login = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-800">
-      <div className="bg-white w-full max-w-lg pt-10 pb-7 rounded-lg text-center">
-        <div className="bg-white w-full max-w-lg py-10 rounded-lg text-center">
-          <h3 className="text-2xl text-gray-800">Log In</h3>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="grid gap-3 mt-5 px-5"
-          >
-            <input
-              ref={register({ required: "Email is required" })}
-              name="email"
-              // name 없으면 useForm이 찾질 못한다!!
-              required
-              //required 두개써서 이중으로 보호. 여기 required html에서 누가 지우면
-              // 위의 ref의 required가 error message로 적용될것임!
-              type="email"
-              placeholder="Email"
-              className="input"
-            />
-            {errors.email?.message && (
-              <FormError errorMessage={errors.email?.message} />
-            )}
-            <input
-              ref={register({ required: "Password is required" })}
-              required
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="input"
-            />
-            {/* 버튼이 하나일경우 무조껀 submit버튼이라 간주됨! */}
-            {errors.password?.message && (
-              <FormError errorMessage={errors.password?.message} />
-            )}
-            {errors.password?.type === "minLength" && (
-              <FormError errorMessage="Password must be more than 10 chars." />
-            )}
-            <button className="mt-3 btn">
-              {loading ? "Loading..." : "Log In"}
-            </button>
-            {loginMutationResult?.login.error && (
-              <FormError errorMessage={loginMutationResult.login.error} />
-            )}
-          </form>
+    <div className="h-screen flex items-center flex-col mt-10 lg:mt-28">
+      {/* 헬멧은 타이틀을 바꿔준다! */}
+      <Helmet>
+        <title>Login | Nuber Eats</title>
+      </Helmet>
+      <div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
+        <img src={nuberLogo} className="w-52 mb-10" alt="Nuber Eats" />{" "}
+        <h4 className="w-full font-medium text-left text-3xl mb-5">
+          Welcome back
+        </h4>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid gap-3 mt-5 w-full mb-5"
+        >
+          <input
+            ref={register({
+              required: "Email is required",
+              pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            })}
+            name="email"
+            // name 없으면 useForm이 찾질 못한다!!
+            required
+            //required 두개써서 이중으로 보호. 여기 required html에서 누가 지우면
+            // 위의 ref의 required가 error message로 적용될것임!
+            type="email"
+            placeholder="Email"
+            className="input"
+          />
+          {errors.email?.message && (
+            <FormError errorMessage={errors.email?.message} />
+          )}
+          {errors.email?.type === "pattern" && (
+            <FormError errorMessage={"Please enter a valid email"} />
+          )}
+          <input
+            ref={register({ required: "Password is required" })}
+            required
+            name="password"
+            type="password"
+            placeholder="Password"
+            className="input"
+          />
+          {/* 버튼이 하나일경우 무조껀 submit버튼이라 간주됨! */}
+          {errors.password?.message && (
+            <FormError errorMessage={errors.password?.message} />
+          )}
+          {errors.password?.type === "minLength" && (
+            <FormError errorMessage="Password must be more than 10 chars." />
+          )}
+          <Button
+            canClick={formState.isValid}
+            //formState에서 제출이 가능할때(모든 유효검사마친뒤) true됨!
+            //제출가능할때!
+            loading={loading}
+            actionText={"Log in"}
+          />
+          {loginMutationResult?.login.error && (
+            <FormError errorMessage={loginMutationResult.login.error} />
+          )}
+        </form>
+        <div>
+          New to Nuber?{" "}
+          <Link to="/create-account" className="text-lime-600 hover:underline">
+            Create an Account
+          </Link>
         </div>
       </div>
     </div>
