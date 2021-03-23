@@ -65,3 +65,63 @@ apollo 는 그래서 좋다. 왜냐하면 처음 api를 통해
 쿼리를 사용하게되면 캐시에 저장된다 그리고 다시 같은 api를
 사용할려는경우 apollo는 캐시부터 뒤져본다 그리고 있으면 api사용안하고
 캐시안에서 가져오고 없으면 api 를 로드해 원하는걸 가져온다!
+캐시에 유저가 저장되면 verified가 false(처음로그인)인경우에
+우리가 캐시를 이용해 캐시에 저장된User:1 (아폴로클라이언트속)을 false를
+true로 바꿔줄것이다 그렇게하면 캐시가 변경됨에 따라 자동적으로 새로고침없이
+화면이 바뀔것이다! (이메일 검증해주세요 빨간색이 없어지고 home화면으로 redirect됨!)
+
+캐쉬를 사용해 업데이트하자.. 예를들어 프로필을 업데이트후 다시
+백앤드에서 api를 불러오게되면
+웹사이트가 느리다..
+(어짜피 저장은 디비에 새로 될것임.. 즉 저장되길 기다리고 다시
+api를 불어올걸 기다릴 필요가 없음!)  
+캐시 수정방법 직접 써서 수정하는방법과 fragment써서,.,,
+또는!!!
+UseQuery를 refetch하는것임!
+리패치는 다시 api를 가져오는것임!(느릴수있음 서버가 크면!!)
+const { data: userData, refetch } = useMe();
+
+최상위 컴포넌트에 css(group)을 적어주면 그밑의 친구들이 작동한다
+예를들어 최상위가 group이고 자식컴포넌트가 group-hover:bg-gray이면
+최상위 컴포넌트가 호버될때 자식컴포넌트가 gray된다
+
+interface IFormProps {
+searchTerm: string;
+}
+이건 input name이랑 searchTerm여기가 똑같아야 타입검사함!!
+
+Lazy Query(조건에 따라 실행되는 쿼리)
+(예를들어 검색어 없이 search?term=)에 못간다!
+useLazyQuery의 callQuery를 실행해야지만 이 쿼리가 실행되는것임!!
+useQuery는 변수보자마자 미리 실행을 시켜놓을것임!!
+즉 [a,{loading,error}]=useLazyQuery는 a가 실행되어야만 쿼리가 작동함!
+
+Replace VS push
+history.replace("/");는 뒤로가기 안되고 푸시는
+기록에 남긴다! 리플레이스는 히스토리에 없다!
+예를들어 search?term=korean해서 search만 남기고 페이지 이동했는데
+그러면 검색어가 없기에 replace로인해 /로 가지만 뒤로 가기하면 seach남긴
+url로 가지않고 전전인 search?term=korean으로 가게된다!
+
+fragment 쓰면 gql에서 속성을 다안써줘도 된
+
+URL 에 온내용 param으로 써보기(split으로 해도되고!)
+const params = useParams<ICategoryParams>();
+이 있다면 주소가 /category/:slug 라면(:다음설정한게 params의 속성이됨!)
+http://localhost:3000/category/american 주소에서
+params.slug는 american이 된다!
+
+--jest
+처음사용할때 모든파일 다 검사하기에 특정부분(우리가 테스트하고싶은부분)
+만 할수있게 설정해야함!
+"test:coverage": "npm test -- --coverage --watchAll=false",
+"jest": {
+"collectCoverageFrom": [
+"./src/components/**/*.tsx",
+"./src/pages/**/*.tsx",
+"./src/routers/**/*.tsx"
+]
+}
+
+최상위루트 app을 지워주고 컴포넌트 파일로 옮김..테스트를 위하여!
+그리고 테스트 대상은 \_\_test\_\_(밑줄두개..인식이안됨)안에 넣어야 jest가 인식할것임!

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ApolloProvider } from "@apollo/client";
-import App from "./App";
+import { App } from "./components/app";
+//다른곳으로 옮겨서 여기도 같이 검사받게 함!!app!!
 import reportWebVitals from "./reportWebVitals";
 import "./styles/styles.css";
 import { client } from "./apollo";

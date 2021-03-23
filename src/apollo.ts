@@ -46,6 +46,7 @@ export const client = new ApolloClient({
       Query: {
         fields: {
           //밑에 것이 gql로컬스테이스 쿼리이름이다!
+          //이걸 사용하기위해서는 gql``를 사용해야한다!! 백앤드까지 안감!
           isLoggedIn: {
             read() {
               return isLoggedInVar();
