@@ -1,3 +1,5 @@
+- npx cypress open (npm run start 한뒤에 하면된다!!)
+
 Tailwind의 screen은 640px부터 시작된다!
 아무것도 적지않으면 sm화면이라고 보면된다.. px-5면 작은사이즈일때 패딩5주고
 xl:px-0이면 화면 xl크기일때 패딩이 0이된다!
@@ -112,16 +114,41 @@ http://localhost:3000/category/american 주소에서
 params.slug는 american이 된다!
 
 --jest
+---(**로직을 검사하는게 아니다!! 사용자가 보일 화면만 테스트 할것임!!)-----------
 처음사용할때 모든파일 다 검사하기에 특정부분(우리가 테스트하고싶은부분)
 만 할수있게 설정해야함!
 "test:coverage": "npm test -- --coverage --watchAll=false",
 "jest": {
 "collectCoverageFrom": [
-"./src/components/**/*.tsx",
-"./src/pages/**/*.tsx",
-"./src/routers/**/*.tsx"
+"./src/components/**/_.tsx",
+"./src/pages/\*\*/_.tsx",
+"./src/routers/\*_/_.tsx"
 ]
 }
 
 최상위루트 app을 지워주고 컴포넌트 파일로 옮김..테스트를 위하여!
 그리고 테스트 대상은 \_\_test\_\_(밑줄두개..인식이안됨)안에 넣어야 jest가 인식할것임!
+test 패키지 제이슨에서 --verbose쓰면 describe 글 보여준다
+//waitfor은 바로 바뀌지 않을때 써야한다.. 헬멧은 랜더가 바로안되고
+//몇초뒤에 바뀌기에 waitfor을 써서 기다려줘야한다!
+
+mock하는 두가지 유형방법
+
+1. MockedProvider 를 사용하여 쿼리에주는 변수를 목한다!
+2. Mock Apollo Client를 사용하면됨!<-조금더 좋은 테스트 방법
+   - client를 목해서 apolloprovider에 넣어주면된다!
+   - 이걸 사용하는 이유는 아폴로 테스트 기본방법은 그냥은안되는데
+   - 이걸 이용해 뮤테이션에 접근할수있다!(아웃풋만 만질수있는데 이걸통해 form에입력가능)\
+
+implementation부분(로직부분)은 우리가 신경쓰지 않기에 100%채울수없다!
+
+spyOn은 alert처럼 implement 안된다 할때 강제로 사용하여 지켜볼수있다.
+리턴을 아무것도 안해주면 그냥 월래 있던걸 진행시키겠다는 의미!
+
+- 라이버리를 테스트 하고싶을땐 라이브러리 자체를 목해야한다!! createAccountTest에있음
+
+- cypress 의 tsconfig는 react application의 typescript 구성과는 다르다!!
+- 또한 findByPlaceholderText 와 같은 리액트 테스트 컴포넌트가 없기에 우리가
+  직접 설치 해줘서 사용해야한다!(npm i @testing-library/cypress --save-dev) 해야함
+  commands 가서 import "@testing-library/cypress/add-commands"; 쓰고
+  tsconfig도 types에 "@testing-library/cypress" 이것을 추가해야함!

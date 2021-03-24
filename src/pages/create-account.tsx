@@ -16,7 +16,7 @@ import {
 //2단계로 받아오는 변수를 백앤드랑 똑같이 해줘야한다! 그다음 apollo:codegen을해주고
 //3단계로 generated파일가면 백앤드에서 설정한 디티오형식 인풋타입 아웃풋타입이
 //들어 있는데 그걸이용해 사용하면된다!
-const CREATE_ACCOUNT_MUTATION = gql`
+export const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
     createAccount(input: $createAccountInput) {
       ok
@@ -115,9 +115,9 @@ export const CreateAccount = () => {
           {errors.password?.message && (
             <FormError errorMessage={errors.password?.message} />
           )}
-          {errors.password?.type === "minLength" && (
+          {/* {errors.password?.type === "minLength" && (
             <FormError errorMessage="Password must be more than 10 chars." />
-          )}
+          )} */}
           <select
             name="role"
             ref={register({ required: true })}
