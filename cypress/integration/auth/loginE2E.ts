@@ -37,20 +37,18 @@ describe("Log In", () => {
     user.findByRole("alert").should("have.text", "Password is required");
   });
 
-  it("can fill out the form", () => {
-    user.visit("/");
-    user.findByPlaceholderText(/email/i).type("bnc3049test1@gmail.com");
-    user.findByPlaceholderText(/password/i).type("123123");
-    user
-      .findByRole("button")
-      .should("not.have.class", "pointer-events-none")
-      //다 입력했기에 포인터가 안올려지는건 클래스에 없어야한다!
-      .click();
-    //토큰은 string 이여야 한다!
-    user.window().its("localStorage.nuber-token").should("be.a", "string");
-  });
-
-  it("sign up", () => {
-    user.visit("/create-account");
+  it("can fill out the form and log in", () => {
+    // @ts-ignore
+    user.login("kwangTest@gmail.com", "123123");
+    // user.visit("/");
+    // user.findByPlaceholderText(/email/i).type("bnc3049test1@gmail.com");
+    // user.findByPlaceholderText(/password/i).type("123123");
+    // user
+    //   .findByRole("button")
+    //   .should("not.have.class", "pointer-events-none")
+    //   //다 입력했기에 포인터가 안올려지는건 클래스에 없어야한다!
+    //   .click();
+    // //토큰은 string 이여야 한다!
+    // user.window().its("localStorage.nuber-token").should("be.a", "string");
   });
 });

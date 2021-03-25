@@ -152,3 +152,7 @@ spyOn은 alert처럼 implement 안된다 할때 강제로 사용하여 지켜볼
   직접 설치 해줘서 사용해야한다!(npm i @testing-library/cypress --save-dev) 해야함
   commands 가서 import "@testing-library/cypress/add-commands"; 쓰고
   tsconfig도 types에 "@testing-library/cypress" 이것을 추가해야함!
+- cypress의 req res 둘다 intercept 가능하다!! create와 edit profile살펴볼것!
+  아이디를 만들때는 일단 디비에 넣고 같은게 있으면 오류가 뜨는데 그 오류를 인터셉트해
+  res 로 ok를 true로 해줘서 오류를 안뜨게 한다
+  edit profile은 req(요청)자체를 바꿔서 보내게 되기에 이름이 수정이 안된다!
