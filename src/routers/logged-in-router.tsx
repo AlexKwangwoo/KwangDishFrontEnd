@@ -10,6 +10,8 @@ import { Search } from "../pages/client/search";
 import { Category } from "../pages/client/category";
 import { RestaurantDetail } from "../pages/client/restaurantDetail";
 import { MyRestaurants } from "../pages/owner/my-restaurants";
+import { AddRestaurant } from "../pages/owner/add-restaurants";
+import { MyRestaurant } from "../pages/owner/my-restaurant";
 
 // const ClientRoutes = [
 //   <Route key={1} path="/" exact>
@@ -67,7 +69,11 @@ const commonRoutes = [
   { path: "/edit-profile", component: <EditProfile /> },
 ];
 
-const restaurantRoutes = [{ path: "/", component: <MyRestaurants /> }];
+const restaurantRoutes = [
+  { path: "/", component: <MyRestaurants /> },
+  { path: "/add-restaurant", component: <AddRestaurant /> },
+  { path: "/restaurants/:id", component: <MyRestaurant /> },
+];
 
 export const LoggedInRouter = () => {
   const { data, loading, error } = useMe();
@@ -86,13 +92,13 @@ export const LoggedInRouter = () => {
       <Switch>
         {data.me.role === "Client" &&
           clientRoutes.map((route) => (
-            <Route key={route.path} path={route.path}>
+            <Route exact key={route.path} path={route.path}>
               {route.component}
             </Route>
           ))}
         {data.me.role === "Owner" &&
           restaurantRoutes.map((route) => (
-            <Route key={route.path} path={route.path}>
+            <Route exact key={route.path} path={route.path}>
               {route.component}
             </Route>
           ))}

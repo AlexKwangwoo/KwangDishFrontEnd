@@ -1,4 +1,5 @@
 - npx cypress open (npm run start 한뒤에 하면된다!!)
+- multer 업로드 기능을 할 수 있다!
 
 Tailwind의 screen은 640px부터 시작된다!
 아무것도 적지않으면 sm화면이라고 보면된다.. px-5면 작은사이즈일때 패딩5주고
