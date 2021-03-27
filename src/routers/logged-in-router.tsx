@@ -12,6 +12,7 @@ import { RestaurantDetail } from "../pages/client/restaurantDetail";
 import { MyRestaurants } from "../pages/owner/my-restaurants";
 import { AddRestaurant } from "../pages/owner/add-restaurants";
 import { MyRestaurant } from "../pages/owner/my-restaurant";
+import { AddDish } from "../pages/owner/add-dish";
 
 // const ClientRoutes = [
 //   <Route key={1} path="/" exact>
@@ -60,6 +61,7 @@ const clientRoutes = [
   },
   {
     path: "/restaurants/:id",
+    //:~ 뒤에 나용이 파라미터에서 변수로 받을 변수명임!!!!
     component: <RestaurantDetail />,
   },
 ];
@@ -73,6 +75,8 @@ const restaurantRoutes = [
   { path: "/", component: <MyRestaurants /> },
   { path: "/add-restaurant", component: <AddRestaurant /> },
   { path: "/restaurants/:id", component: <MyRestaurant /> },
+  //:~ 뒤에 나용이 파라미터에서 변수로 받을 변수명임!!!!
+  { path: "/restaurants/:restaurantId/add-dish", component: <AddDish /> },
 ];
 
 export const LoggedInRouter = () => {

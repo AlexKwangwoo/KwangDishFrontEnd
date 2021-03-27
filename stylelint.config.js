@@ -2,7 +2,13 @@ module.exports = {
   extends: ["stylelint-config-recommended"],
 
   rules: {
-    "declaration-block-no-duplicate-properties": [true],
+    "declaration-block-no-duplicate-custom-properties": true,
+    "declaration-block-no-duplicate-properties": [
+      true,
+      {
+        ignore: ["consecutive-duplicates-with-different-values"],
+      },
+    ],
     "no-duplicate-selectors": null,
     "at-rule-no-unknown": [
       true,
