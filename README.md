@@ -1,5 +1,7 @@
 - npx cypress open (npm run start 한뒤에 하면된다!!)
 - multer 업로드 기능을 할 수 있다!
+- victory 차트 할수있게 해줌
+- paddle 결제 시스탬!! -> request demo -> create my free
 
 Tailwind의 screen은 640px부터 시작된다!
 아무것도 적지않으면 sm화면이라고 보면된다.. px-5면 작은사이즈일때 패딩5주고
@@ -157,3 +159,9 @@ spyOn은 alert처럼 implement 안된다 할때 강제로 사용하여 지켜볼
   아이디를 만들때는 일단 디비에 넣고 같은게 있으면 오류가 뜨는데 그 오류를 인터셉트해
   res 로 ok를 true로 해줘서 오류를 안뜨게 한다
   edit profile은 req(요청)자체를 바꿔서 보내게 되기에 이름이 수정이 안된다!
+
+디시 추가는 먼저 selected함수를 통해 itemOders 배열을 검사해 있는지 확인후
+Dish컴포넌트에 넘겨준다. 또한 add와 remove 함수를 넘겨준다! 여기서 함수를 Dish에서
+안만들고 RestaurantDetail에서 만들어서 주는이유는 디테일에서 orderItems를 관리하기떄문이다
+그래서 DIsh에서 isSelected에 따라 Add를 쓸지 remove 를 쓸지 정해진후 id를 건내줌으로써
+콜백을 통해 add or remove함수가 detail에서 실행된다!

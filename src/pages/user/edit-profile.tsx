@@ -5,6 +5,8 @@ import { Button } from "../../components/button";
 import { useMe } from "../../hooks/useMe";
 import { editProfile, editProfileVariables } from "../../generated/editProfile";
 import { Helmet } from "react-helmet";
+import { LOCALSTORAGE_TOKEN } from "../../constants";
+import { useHistory } from "react-router-dom";
 
 const EDIT_PROFILE_MUTATION = gql`
   mutation editProfile($input: EditProfileInput!) {
@@ -23,6 +25,12 @@ interface IFormProps {
 export const EditProfile = () => {
   const { data: userData } = useMe();
   const client = useApolloClient();
+  const history = useHistory();
+  const onClickLoggedOut = () => {
+    localStorage.removeItem(LOCALSTORAGE_TOKEN);
+    window.location.assign("/");
+    //리로드하면서 루트페이지로 가게해준다!
+  };
   const onCompleted = (data: editProfile) => {
     const {
       editProfile: { ok, error },
@@ -111,6 +119,12 @@ export const EditProfile = () => {
           actionText="Save Profile"
         />
       </form>
+      <button
+        className="focus:outline-none text-red-600 font-bold text-lg"
+        onClick={() => onClickLoggedOut()}
+      >
+        Logged Out
+      </button>
     </div>
   );
 };

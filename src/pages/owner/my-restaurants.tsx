@@ -42,6 +42,9 @@ export const MyRestaurants = () => {
           </>
         ) : (
           <div className="grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
+            {/* md는 화면이 커질때.. 아닐떄는 그리드가 하나라 생각하면됨! tailwind는
+            기본화면이 작은 화면일때 기준으로 시작함. 그래서 큰화면바꾸고싶을땐
+            큰화면 이라 써주고 적용해주면됨!*/}
             {data?.myRestaurants.restaurants.map((restaurant) => (
               <Restaurant
                 key={restaurant.id}
