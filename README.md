@@ -2,6 +2,12 @@
 - multer 업로드 기능을 할 수 있다!
 - victory 차트 할수있게 해줌
 - paddle 결제 시스탬!! -> request demo -> create my free
+- google Cloud console 개발자 에서 맵 api key등을 받아옴!
+  https://console.cloud.google.com/apis/library?project=youtubeclone-295601
+  npm i @types/google-map-react 타입을 설치해서 찾아줌!
+
+https://happist.com/568746/%EA%B5%AC%EA%B8%80%EB%A7%B5-%ED%99%9C%EC%9A%A9%EB%B2%95-%EA%B5%AC%EA%B8%80%EB%A7%B5-api-key-%EB%B0%9C%EA%B8%89%EB%B0%A9%EB%B2%95
+에서 구글맵 결제화면 방법있음
 
 Tailwind의 screen은 640px부터 시작된다!
 아무것도 적지않으면 sm화면이라고 보면된다.. px-5면 작은사이즈일때 패딩5주고
@@ -34,6 +40,11 @@ tailwind가 PureCss에 적용이 안될때!!
 https://stackoverflow.com/questions/62118325/how-do-you-get-rid-of-these-sass-linting-errors-when-using-tailwind-css/62254613#62254613
 이용한다!
 
+------------------------------------generated 타입 codegen정리!!
+codegen<global>은
+내가 뮤테이션을 통해 인풋을 가져올때 그인풋속에 포함된 친구들을
+자동으로 가져와준다.. 예를들어 UserRole
+
 햇깔리면 15.7보기
 아폴로 이용해서 타입 정하기!!
 apollo client:codegen --target=typescript --outputFlat 입력하면(최상위루트로 다모아줌!!)
@@ -52,6 +63,8 @@ login: loginMutation_login;
 export interface loginMutationVariables {
 loginInput: LoginInput;
 }
+
+---
 
 로컬스토리지 이용!!
 localStorage.setItem(LOCALSTORAGE_TOKEN, token);
@@ -165,3 +178,6 @@ Dish컴포넌트에 넘겨준다. 또한 add와 remove 함수를 넘겨준다! �
 안만들고 RestaurantDetail에서 만들어서 주는이유는 디테일에서 orderItems를 관리하기떄문이다
 그래서 DIsh에서 isSelected에 따라 Add를 쓸지 remove 를 쓸지 정해진후 id를 건내줌으로써
 콜백을 통해 add or remove함수가 detail에서 실행된다!
+
+실시간을 위한 웹소캣 설치!
+npm install subscriptions-transport-ws

@@ -3,9 +3,12 @@ import {
   InMemoryCache,
   makeVar,
   createHttpLink,
+  split,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { LOCALSTORAGE_TOKEN } from "./constants";
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 
 // export const isLoggedInVar = makeVar(false);
 //이 makevar => reactVeriable 은 어디든지 사용가능하고 이게 바뀌면
@@ -18,6 +21,21 @@ const token = localStorage.getItem(LOCALSTORAGE_TOKEN);
 //그뒤로 토큰이 로컬에 저장되면 true가 되고 토큰도 값이 있음
 export const isLoggedInVar = makeVar(Boolean(token));
 export const authTokenVar = makeVar(token);
+
+//디비에서 query.를 사용해 연결할때는 request header를 가지고
+//subscription을 사용하면 connection의 context를 사용했다!
+const wsLink = new WebSocketLink({
+  uri: "ws://localhost:4000/graphql",
+  options: {
+    reconnect: true,
+    connectionParams: {
+      "X-JWT": authTokenVar() || "",
+      // "x-jwt": authTokenVar() || "",
+      //여기 내용들은 아폴로 그래프큐엘 참조함 23.2강
+      //req는 x-jwt로 오지만 connection 소켓으로오는건 x-jwt대문자로 넣어줘야함!!
+    },
+  },
+});
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -35,9 +53,24 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  //위의 함수는 false 또는 true를 줄껀데 true면 wsLink고
+  //false면 authLink로 갈껏임! //일반 사용은 false받아  authLink로 갈것임!
+  wsLink,
+  authLink.concat(httpLink)
+);
+
 export const client = new ApolloClient({
   //link는 연결시켜준다 http, auth, webSocket등
-  link: authLink.concat(httpLink),
+  link: splitLink,
+  // link: authLink.concat(httpLink),
   //localhost~~ head+ 토큰 정보를 넣어 보내겠음!
   cache: new InMemoryCache({
     //캐시를 사용하여 localstate를 저장할것임..

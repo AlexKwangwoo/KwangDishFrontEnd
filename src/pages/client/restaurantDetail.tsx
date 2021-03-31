@@ -1,11 +1,13 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Dish } from "../../components/dish";
+import { DishOption } from "../../components/dish-option";
 import { DISH_FRAGMENT, RESTAURANT_FRAGMENT } from "../../fragments";
 import { restaurant, restaurantVariables } from "../../generated/restaurant";
 import { Helmet } from "react-helmet-async";
 import { CreateOrderItemInput } from "../../generated/globalTypes";
+import { createOrder, createOrderVariables } from "../../generated/createOrder";
 
 const RESTAURANT_QUERY = gql`
   query restaurant($input: RestaurantInput!) {
@@ -29,6 +31,7 @@ const CREATE_ORDER_MUTATION = gql`
     createOrder(input: $input) {
       ok
       error
+      orderId
     }
   }
 `;
@@ -83,7 +86,7 @@ export const RestaurantDetail = () => {
     );
   };
 
-  const addOptionToItem = (dishId: number, option: any) => {
+  const addOptionToItem = (dishId: number, optionName: string) => {
     if (!isSelected(dishId)) {
       return;
     }
@@ -107,15 +110,38 @@ export const RestaurantDetail = () => {
       const hasOption = Boolean(
         //중복 옵션이 추가되는것을 막아야한다
         //그래서 지금 추가할려는 옵션이 있는지 없는지 체크하자!
-        oldItem.options?.find((aOption) => aOption.name == option.name)
+        oldItem.options?.find((aOption) => aOption.name == optionName)
       );
       if (!hasOption) {
         removeFromOrder(dishId);
         setOrderItems((current) => [
-          { dishId, options: [option, ...oldItem.options!] },
+          { dishId, options: [{ name: optionName }, ...oldItem.options!] },
           ...current,
         ]);
       }
+    }
+  };
+
+  const removeOptionFromItem = (dishId: number, optionName: string) => {
+    if (!isSelected(dishId)) {
+      return;
+    }
+    const oldItem = getItem(dishId);
+    if (oldItem) {
+      removeFromOrder(dishId);
+      //ex 위에서 복사해두고 옵션 두개 가지고 있는걸 지운다!!
+      //복사한것에서 옵션만 하나지우고 다시 원래 배열에 넣어준다!
+      setOrderItems((current) => [
+        {
+          dishId,
+          options: oldItem.options?.filter(
+            (option) => option.name !== optionName
+          ),
+        },
+        //가지고 있던거 넣기!
+        ...current,
+      ]);
+      return;
     }
   };
 
@@ -139,9 +165,48 @@ export const RestaurantDetail = () => {
       //----즉 내가 선택한 아이탬에서 화면에 있는 옵션들이 선택되어있는지 비교!!
       return Boolean(getOptionFromItem(item, optionName));
     }
+    return false;
   };
 
-  console.log(orderItems);
+  const triggerCancelOrder = () => {
+    setOrderStarted(false);
+    setOrderItems([]);
+  };
+  const history = useHistory();
+  const onCompleted = (data: createOrder) => {
+    const {
+      createOrder: { ok, orderId },
+    } = data;
+    if (data.createOrder.ok) {
+      history.push(`/orders/${orderId}`);
+    }
+  };
+  const [createOrderMutation, { loading: placingOrder }] = useMutation<
+    createOrder,
+    createOrderVariables
+  >(CREATE_ORDER_MUTATION, {
+    onCompleted,
+  });
+  const triggerConfirmOrder = () => {
+    if (placingOrder) {
+      return;
+    }
+    if (orderItems.length === 0) {
+      alert("Can't place empty order");
+      return;
+    }
+    const ok = window.confirm("You are about to place an order");
+    if (ok) {
+      createOrderMutation({
+        variables: {
+          input: {
+            restaurantId: +params.id,
+            items: orderItems,
+          },
+        },
+      });
+    }
+  };
 
   return (
     <div>
@@ -166,9 +231,24 @@ export const RestaurantDetail = () => {
       </div>
 
       <div className="container pb-32 flex flex-col items-end mt-20">
-        <button onClick={triggerStartOrder} className="btn px-10">
-          {orderStarted ? "Ordering" : "Start Order"}
-        </button>
+        {!orderStarted && (
+          <button onClick={triggerStartOrder} className="btn px-10">
+            Start Order
+          </button>
+        )}
+        {orderStarted && (
+          <div className="flex items-center">
+            <button onClick={triggerConfirmOrder} className="btn px-10 mr-3">
+              Confirm Order
+            </button>
+            <button
+              onClick={triggerCancelOrder}
+              className="btn px-10 bg-black hover:bg-black"
+            >
+              Cancel Order
+            </button>
+          </div>
+        )}
         <div className="w-full grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
           {data?.restaurant.restaurant?.menu.map((dish, index) => (
             <Dish
@@ -188,24 +268,15 @@ export const RestaurantDetail = () => {
             >
               {/* 여기 밑에 쓰는 부분이 children에 Dish컴포넌트에 들어갈것임!! */}
               {dish.options?.map((option, index) => (
-                <span
-                  onClick={() =>
-                    addOptionToItem
-                      ? addOptionToItem(dish.id, {
-                          name: option.name,
-                        })
-                      : null
-                  }
-                  className={`flex border items-center ${
-                    isOptionSelected(dish.id, option.name)
-                      ? "border-gray-800"
-                      : ""
-                  }`}
+                <DishOption
                   key={index}
-                >
-                  <h6 className="mr-2">{option.name}</h6>
-                  <h6 className="text-sm opacity-75">(${option.extra})</h6>
-                </span>
+                  dishId={dish.id}
+                  isSelected={isOptionSelected(dish.id, option.name)}
+                  name={option.name}
+                  extra={option.extra}
+                  addOptionToItem={addOptionToItem}
+                  removeOptionFromItem={removeOptionFromItem}
+                />
               ))}
             </Dish>
           ))}
