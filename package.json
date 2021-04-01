@@ -37,6 +37,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "tailwind:prodbuild": "cross-env NODE_ENV=production npm run tailwind:build",
     "tailwind:build": "tailwind build ./src/styles/tailwind.css -o ./src/styles/styles.css",
     "start": "npm run apollo:codegen & npm run tailwind:build & react-scripts start",
     "apollo:codegen": " rimraf src/generated && apollo client:codegen src/generated --target=typescript --outputFlat",
