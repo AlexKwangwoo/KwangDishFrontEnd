@@ -117,13 +117,20 @@ export const AddRestaurant = () => {
       //async uploadFile(@UploadedFile() file) {
       //'file'과 똑같은 것이다!!
       formBody.append("file", actualFile);
-      const { url: coverImg } = await //파일을 전송하고 url을 받을 것임!
-      (
-        await fetch("https://kwang-eats-backend.herokuapp.com/uploads/", {
+
+      const dataFile = await fetch(
+        "https://kwang-eats-backend.herokuapp.com/uploads/",
+        {
           method: "POST",
           body: formBody,
-        })
-      ).json();
+        }
+      );
+      console.log("dataFile!!!!!!!!!!!!!!", dataFile);
+      const { url: coverImg } = await dataFile.json();
+      //파일을 전송하고 url을 받을 것임!
+      //   await fetch("https://kwang-eats-backend.herokuapp.com/uploads/", {
+      //await fetch("http://localhost:4000/uploads/", {
+
       console.log("coverImg", coverImg);
       setImageUrl(coverImg);
       try {
