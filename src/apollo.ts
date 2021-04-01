@@ -25,7 +25,11 @@ export const authTokenVar = makeVar(token);
 //디비에서 query.를 사용해 연결할때는 request header를 가지고
 //subscription을 사용하면 connection의 context를 사용했다!
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:4000/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "wss://kwang-eats-backend.herokuapp.com/graphql"
+      : //nelify가 우리에게 https 와 wss를 제공함 s하나더추가함으로 보안성높임!
+        `ws://localhost:4000/graphql`,
   options: {
     reconnect: true,
     connectionParams: {
@@ -38,7 +42,10 @@ const wsLink = new WebSocketLink({
 });
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://kwang-eats-backend.herokuapp.com/graphql"
+      : "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
