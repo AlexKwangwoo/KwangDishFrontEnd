@@ -8,7 +8,12 @@
   npm i -D @types/googlemaps 타입을 설치해서 찾아줌!
 - npx cypress open 사이프레스 가동
 - build 에서 CI=false 는 경고들을 에러로 표시하는데 그냥 무시하게해줌!
-- npm i cross-env 설치후 tailwind prodbuild에 cross-env NODE_ENV=production 추가
+- npm install --save-dev cross-env 설치후 tailwind prodbuild에 cross-env NODE_ENV=production 추가
+- public에 \_redirects 추가.. 왜냐하면 넷리파이가 계정만들기 해서 새로고침하면
+  페이지를 찾을수없는데.. 그이유는 파일을 로드 못하기때문이다 그래서
+  파일안에 /\* /index.html 200 써주면.. 그의미가 새로고침으로 루트URL다음 어떤글자가와도
+  html로 가게해준다.. 그래서 /create-account 가 있었다면 다시 index.html에 저주소를 보내
+  찾아줄수있게된다!
 
 https://happist.com/568746/%EA%B5%AC%EA%B8%80%EB%A7%B5-%ED%99%9C%EC%9A%A9%EB%B2%95-%EA%B5%AC%EA%B8%80%EB%A7%B5-api-key-%EB%B0%9C%EA%B8%89%EB%B0%A9%EB%B2%95
 에서 구글맵 결제화면 방법있음
