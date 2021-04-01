@@ -120,15 +120,10 @@ export const AddRestaurant = () => {
       const { url: coverImg } = await //파일을 전송하고 url을 받을 것임!
       //  await fetch("http://localhost:4000/uploads/", {
       (
-        await fetch(
-          process.env.NODE_ENV === "production"
-            ? "https://kwang-eats-backend.herokuapp.com/uploads/"
-            : "http://localhost:4000/uploads/",
-          {
-            method: "POST",
-            body: formBody,
-          }
-        )
+        await fetch("https://kwang-eats-backend.herokuapp.com/uploads/", {
+          method: "POST",
+          body: formBody,
+        })
       ).json();
       setImageUrl(coverImg);
       try {
