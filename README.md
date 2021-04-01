@@ -5,6 +5,8 @@
 - google Cloud console 개발자 에서 맵 api key등을 받아옴!
   https://console.cloud.google.com/apis/library?project=youtubeclone-295601
   npm i @types/google-map-react 타입을 설치해서 찾아줌!
+  npm i -D @types/googlemaps 타입을 설치해서 찾아줌!
+- npx cypress open 사이프레스 가동
 
 https://happist.com/568746/%EA%B5%AC%EA%B8%80%EB%A7%B5-%ED%99%9C%EC%9A%A9%EB%B2%95-%EA%B5%AC%EA%B8%80%EB%A7%B5-api-key-%EB%B0%9C%EA%B8%89%EB%B0%A9%EB%B2%95
 에서 구글맵 결제화면 방법있음
