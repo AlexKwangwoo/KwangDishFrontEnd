@@ -2,7 +2,7 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { FormError } from "../components/form-error";
-import nuberLogo from "../images/logo.svg";
+import KwangLogoBlack from "../images/KwangLogoBlack.png";
 import {
   loginMutation,
   loginMutationVariables,
@@ -103,7 +103,7 @@ export const Login = () => {
         <title>Login | Nuber Eats</title>
       </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
-        <img src={nuberLogo} className="w-52 mb-10" alt="Nuber Eats" />{" "}
+        <img src={KwangLogoBlack} className="w-52 mb-10" alt="Nuber Eats" />{" "}
         <h4 className="w-full font-medium text-left text-3xl mb-5">
           Welcome back
         </h4>
@@ -159,7 +159,10 @@ export const Login = () => {
         </form>
         <div>
           New to Nuber?{" "}
-          <Link to="/create-account" className="text-lime-600 hover:underline">
+          <Link
+            to="/create-account"
+            className="text-yellow-500 hover:underline"
+          >
             Create an Account
           </Link>
         </div>
