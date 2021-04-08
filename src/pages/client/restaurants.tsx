@@ -224,7 +224,7 @@ export const Restaurants = () => {
               Here's the fastest delivery for you
             </div>
             <div className="-mr-4">
-              <SliderFixed {...settings}>
+              {/* <SliderFixed {...settings}>
                 {cateData?.category?.restaurants !== undefined &&
                   cateData?.category?.restaurants?.map((restaurant) => (
                     <div className="pr-4" key={restaurant.id}>
@@ -238,7 +238,7 @@ export const Restaurants = () => {
                       />
                     </div>
                   ))}
-              </SliderFixed>
+              </SliderFixed> */}
             </div>
           </div>
           <div>
@@ -250,7 +250,7 @@ export const Restaurants = () => {
               className="-mr-4 bg-gray-600 bg-cover md:bg-contain h-80 shadow-inner bg-bottom"
               style={{ backgroundImage: `url(${cityView})` }}
             >
-              <SliderFixed {...settings2}>
+              {/* <SliderFixed {...settings2}>
                 {bbqData?.category?.restaurants !== undefined &&
                   bbqData?.category?.restaurants?.map((restaurant) => (
                     <div className="pr-4" key={restaurant.id}>
@@ -264,7 +264,7 @@ export const Restaurants = () => {
                       />
                     </div>
                   ))}
-              </SliderFixed>
+              </SliderFixed> */}
             </div>
           </div>
           <div className=" md:flex md:justify-between mt-16 mb-8">
