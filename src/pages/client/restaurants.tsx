@@ -171,7 +171,7 @@ export const Restaurants = () => {
   return (
     <div>
       <Helmet>
-        <title>Home | Nuber Eats</title>
+        <title>Home | KwangDish</title>
       </Helmet>
       <div className="bg-gray-800 w-full py-8">
         <div className="max-w-screen-2xl mx-auto grid md:grid-cols-2">

@@ -6,6 +6,7 @@ import { FULL_ORDER_FRAGMENT } from "../../fragments";
 import { coockedOrders } from "../../generated/coockedOrders";
 import { Link, useHistory } from "react-router-dom";
 import { takeOrder, takeOrderVariables } from "../../generated/takeOrder";
+import { Helmet } from "react-helmet";
 
 const COOCKED_ORDERS_SUBSCRIPTION = gql`
   subscription coockedOrders {
@@ -169,6 +170,9 @@ export const Dashboard = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | KwangDish</title>
+      </Helmet>
       <div
         className="overflow-hidden"
         style={{ width: window.innerWidth, height: "50vh" }}

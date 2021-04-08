@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import KwangLogoBlack from "../images/KwangLogoBlack.png";
 import Modal from "react-awesome-modal";
 import { ModalDetail } from "./modalDetail";
+import { UserRole } from "../generated/globalTypes";
 interface IFormProps {
   searchTerm: string;
 }
@@ -47,21 +48,23 @@ export const Header: React.FC = () => {
           <Link to="/">
             <img src={KwangLogoBlack} className="w-48 mr-11" alt="Nuber Eats" />
           </Link>
-          <form
-            onSubmit={handleSubmit(onSearchSubmit)}
-            className="md:w-2/3 flex bg-gray-100 items-center border-b-2 border-black"
-          >
-            <div className="ml-4">
-              <FontAwesomeIcon icon={faSearch} className="text-lm" />
-            </div>
-            <input
-              ref={register({ required: true, min: 3 })}
-              name="searchTerm"
-              type="Search"
-              className="input rounded-sm border-none bg-gray-100 w-3/4 md:w-full placeholder-gray-500"
-              placeholder="What are you craving?"
-            />
-          </form>
+          {data?.me.role !== UserRole.Delivery && (
+            <form
+              onSubmit={handleSubmit(onSearchSubmit)}
+              className="md:w-2/3 focus:bg-gray-100 flex bg-gray-100 items-center border-b-2 border-black"
+            >
+              <div className="ml-4 mr-2">
+                <FontAwesomeIcon icon={faSearch} className="text-lm" />
+              </div>
+              <input
+                ref={register({ required: true, min: 3 })}
+                name="searchTerm"
+                type="Search"
+                className="input rounded-sm border-none  bg-gray-100 w-3/4 md:w-full placeholder-gray-500 focus:bg-gray-100"
+                placeholder="What are you craving?"
+              />
+            </form>
+          )}
           <span className="text-xs ml-4">
             <FontAwesomeIcon
               onClick={openModal}

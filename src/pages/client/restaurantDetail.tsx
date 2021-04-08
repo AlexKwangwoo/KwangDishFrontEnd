@@ -219,7 +219,7 @@ export const RestaurantDetail = () => {
   return (
     <div>
       <Helmet>
-        <title>{data?.restaurant.restaurant?.name || ""} | Nuber Eats</title>
+        <title>{data?.restaurant.restaurant?.name || ""} | KwangDish</title>
       </Helmet>
       <div
         className=" bg-gray-800 bg-center bg-cover h-80 mt-10 shadow-inner flex items-end"

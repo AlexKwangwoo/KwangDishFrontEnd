@@ -100,7 +100,7 @@ export const Login = () => {
     <div className="h-screen flex items-center flex-col mt-10 lg:mt-28">
       {/* 헬멧은 타이틀을 바꿔준다! */}
       <Helmet>
-        <title>Login | Nuber Eats</title>
+        <title>Login | KwangDish</title>
       </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
         <img src={KwangLogoBlack} className="w-52 mb-10" alt="Nuber Eats" />{" "}

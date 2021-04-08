@@ -46,7 +46,7 @@ export const Category = () => {
   return (
     <div>
       <Helmet>
-        <title>Search | Nuber Eats</title>
+        <title>Search | KwangDish</title>
       </Helmet>
       <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
         <div className="max-w-full pb-8">
