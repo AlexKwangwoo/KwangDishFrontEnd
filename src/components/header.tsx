@@ -75,9 +75,9 @@ export const Header: React.FC = () => {
               effect="fadeInUp"
               onClickAway={() => closeModal()}
             >
-              <div className="p-8">
-                <ModalDetail />
-              </div>
+              {/* <div className="p-8"> */}
+              <ModalDetail />
+              {/* </div> */}
             </Modal>
 
             {/* <Link to="/edit-profile">
