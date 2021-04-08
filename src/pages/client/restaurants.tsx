@@ -198,7 +198,11 @@ export const Restaurants = () => {
           placeholder="Search restaurants..."
         />
       </form> */}
-      {!loading && !cateLoading && !bbqLoading ? (
+      {!loading &&
+      !cateLoading &&
+      !bbqLoading &&
+      bbqData?.category?.restaurants !== undefined &&
+      bbqData?.category?.restaurants !== undefined ? (
         <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
           <div className="max-w-full border-b-2 pb-8">
             <div className="flex justify-around max-w-sm mx-auto ">
@@ -224,7 +228,7 @@ export const Restaurants = () => {
               Here's the fastest delivery for you
             </div>
             <div className="-mr-4">
-              {/* <SliderFixed {...settings}>
+              <SliderFixed {...settings}>
                 {cateData?.category?.restaurants !== undefined &&
                   cateData?.category?.restaurants?.map((restaurant) => (
                     <div className="pr-4" key={restaurant.id}>
@@ -238,7 +242,7 @@ export const Restaurants = () => {
                       />
                     </div>
                   ))}
-              </SliderFixed> */}
+              </SliderFixed>
             </div>
           </div>
           <div>
@@ -250,7 +254,7 @@ export const Restaurants = () => {
               className="-mr-4 bg-gray-600 bg-cover md:bg-contain h-80 shadow-inner bg-bottom"
               style={{ backgroundImage: `url(${cityView})` }}
             >
-              {/* <SliderFixed {...settings2}>
+              <SliderFixed {...settings2}>
                 {bbqData?.category?.restaurants !== undefined &&
                   bbqData?.category?.restaurants?.map((restaurant) => (
                     <div className="pr-4" key={restaurant.id}>
@@ -264,7 +268,7 @@ export const Restaurants = () => {
                       />
                     </div>
                   ))}
-              </SliderFixed> */}
+              </SliderFixed>
             </div>
           </div>
           <div className=" md:flex md:justify-between mt-16 mb-8">
