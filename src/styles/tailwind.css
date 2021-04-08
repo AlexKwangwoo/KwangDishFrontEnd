@@ -15,5 +15,5 @@
 }
 
 .btn {
-  @apply text-lg font-medium focus:outline-none text-white py-4  transition-colors bg-lime-600 hover:bg-lime-700;
+  @apply text-lg font-medium focus:outline-none text-white py-4  transition-colors bg-yellow-400 hover:bg-yellow-500;
 }

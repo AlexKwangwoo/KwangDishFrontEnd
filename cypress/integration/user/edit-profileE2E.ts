@@ -24,6 +24,7 @@ describe("Edit Profile", () => {
     });
     user.visit("/edit-profile");
     user.findByPlaceholderText(/email/i).clear().type("kwangTest2@gmail.com");
+    user.wait(2000);
     user.findByRole("button").click();
   });
 });

@@ -1,7 +1,8 @@
 import { gql, useLazyQuery } from "@apollo/client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useHistory, useLocation } from "react-router-dom";
+import { Restaurant } from "../../components/restaurant";
 import { RESTAURANT_FRAGMENT } from "../../fragments";
 import {
   searchRestaurant,
@@ -25,6 +26,7 @@ const SEARCH_RESTAURANT = gql`
 `;
 
 export const Search = () => {
+  const [queryName, setQueryName] = useState<string>();
   const location = useLocation();
   const history = useHistory();
   const [callQuery, { loading, data, called }] = useLazyQuery<
@@ -36,6 +38,7 @@ export const Search = () => {
 
   useEffect(() => {
     const [, query] = location.search.split("?term=");
+    setQueryName(query);
     //~~~search?term= ~~이 나올건데 ?term=뒤에껄 가져오겟음!
     if (!query) {
       return history.replace("/");
@@ -56,7 +59,27 @@ export const Search = () => {
       <Helmet>
         <title>Search | Nuber Eats</title>
       </Helmet>
-      <h1>Search page</h1>
+      <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+        <div className="max-w-full pb-8">
+          {!loading ? (
+            <div>
+              <div className="text-3xl font-semibold mt-6">"{queryName}"</div>
+              <div className="grid mt-6 md:grid-cols-3 gap-x-5 gap-y-10">
+                {data?.searchRestaurant.restaurants?.map((restaurant) => (
+                  <Restaurant
+                    key={restaurant.id}
+                    id={restaurant.id + ""}
+                    //이렇게 하면 숫자에서 문자로 변함!
+                    coverImg={restaurant.coverImg}
+                    name={restaurant.name}
+                    categoryName={restaurant.category?.name}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 };

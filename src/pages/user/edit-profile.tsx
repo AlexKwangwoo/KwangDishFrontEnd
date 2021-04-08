@@ -26,11 +26,11 @@ export const EditProfile = () => {
   const { data: userData } = useMe();
   const client = useApolloClient();
   const history = useHistory();
-  const onClickLoggedOut = () => {
-    localStorage.removeItem(LOCALSTORAGE_TOKEN);
-    window.location.assign("/");
-    //리로드하면서 루트페이지로 가게해준다!
-  };
+  // const onClickLoggedOut = () => {
+  //   localStorage.removeItem(LOCALSTORAGE_TOKEN);
+  //   window.location.assign("/");
+  //   //리로드하면서 루트페이지로 가게해준다!
+  // };
   const onCompleted = (data: editProfile) => {
     const {
       editProfile: { ok, error },
@@ -119,12 +119,12 @@ export const EditProfile = () => {
           actionText="Save Profile"
         />
       </form>
-      <button
+      {/* <button
         className="focus:outline-none text-red-600 font-bold text-lg"
         onClick={() => onClickLoggedOut()}
       >
         Logged Out
-      </button>
+      </button> */}
     </div>
   );
 };

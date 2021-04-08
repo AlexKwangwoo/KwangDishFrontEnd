@@ -8,6 +8,14 @@ import { restaurant, restaurantVariables } from "../../generated/restaurant";
 import { Helmet } from "react-helmet-async";
 import { CreateOrderItemInput } from "../../generated/globalTypes";
 import { createOrder, createOrderVariables } from "../../generated/createOrder";
+import {
+  faAddressBook,
+  faList,
+  faPizzaSlice,
+  faSearch,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RESTAURANT_QUERY = gql`
   query restaurant($input: RestaurantInput!) {
@@ -214,20 +222,34 @@ export const RestaurantDetail = () => {
         <title>{data?.restaurant.restaurant?.name || ""} | Nuber Eats</title>
       </Helmet>
       <div
-        className=" bg-gray-800 bg-center bg-cover py-48"
+        className=" bg-gray-800 bg-center bg-cover h-80 mt-10 shadow-inner flex items-end"
         style={{
           backgroundImage: `url(${data?.restaurant.restaurant?.coverImg})`,
         }}
       >
-        <div className="bg-white xl:w-3/12 py-8 pl-48">
-          <h4 className="text-4xl mb-3">{data?.restaurant.restaurant?.name}</h4>
-          <h5 className="text-sm font-light mb-2">
-            {data?.restaurant.restaurant?.category?.name}
-          </h5>
-          <h6 className="text-sm font-light">
-            {data?.restaurant.restaurant?.address}
-          </h6>
+        <div className="text-white w-full pl-10 pb-4 sm:pl-48 sm:pb-30  shadow-inner">
+          <div className="max-w-sm bg-gray-700 bg-opacity-50 pl-4 py-4">
+            {/* className="xl:w-3/12 pl-10 pt-40 sm:py-8 sm:pl-48" */}
+            <h4 className="text-4xl font-semibold mb-3 mx-auto">
+              {data?.restaurant.restaurant?.name}
+            </h4>
+            <h5 className="text-md font-semibold mb-2">
+              <FontAwesomeIcon
+                icon={faPizzaSlice}
+                className="text-sm mr-2 text-yellow-600"
+              />
+              Category : {data?.restaurant.restaurant?.category?.name}
+            </h5>
+            <h6 className="text-md font-semibold">
+              <FontAwesomeIcon
+                icon={faAddressBook}
+                className="text-sm mr-2 text-green-700"
+              />
+              Address : {data?.restaurant.restaurant?.address}
+            </h6>
+          </div>
         </div>
+        {/* <div className="w-full h-10 bg-gradient-to-t from-black to-gray-200"></div> */}
       </div>
 
       <div className="container pb-32 flex flex-col items-end mt-20">

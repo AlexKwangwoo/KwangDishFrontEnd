@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Restaurants } from "../pages/client/restaurants";
 import { useMe } from "../hooks/useMe";
 import { Header } from "../components/header";
+import { Footer } from "../components/footer";
 import { ConfirmEmail } from "../pages/user/confirm-email";
 import { EditProfile } from "../pages/user/edit-profile";
 import { NotFound } from "../pages/404";
@@ -132,6 +133,7 @@ export const LoggedInRouter = () => {
           <NotFound />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 };
