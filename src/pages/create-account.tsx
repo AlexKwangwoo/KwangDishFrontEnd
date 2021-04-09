@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "../components/button";
 import { FormError } from "../components/form-error";
-import nuberLogo from "../images/logo.svg";
+import KwangLogoBlack from "../images/KwangLogoBlack.png";
 import { UserRole } from "../generated/globalTypes";
 import {
   createAccountMutation,
@@ -79,7 +79,7 @@ export const CreateAccount = () => {
         <title>Create Account | KwangDish</title>
       </Helmet>
       <div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
-        <img src={nuberLogo} className="w-52 mb-10" alt="Nuber Eats" />
+        <img src={KwangLogoBlack} className="w-52 mb-10" alt="Nuber Eats" />
         <h4 className="w-full font-medium text-left text-3xl mb-5">
           Let's get started
         </h4>

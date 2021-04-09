@@ -161,7 +161,7 @@ export const Login = () => {
           New to KwangDish?
           <Link
             to="/create-account"
-            className="text-yellow-500 hover:underline"
+            className="text-yellow-500 hover:underline ml-2"
           >
             Create an Account
           </Link>
