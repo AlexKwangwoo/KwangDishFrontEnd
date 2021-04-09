@@ -158,7 +158,7 @@ export const Login = () => {
           )}
         </form>
         <div>
-          New to Nuber?{" "}
+          New to KwangDish?
           <Link
             to="/create-account"
             className="text-yellow-500 hover:underline"
