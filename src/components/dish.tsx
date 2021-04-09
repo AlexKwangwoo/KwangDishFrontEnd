@@ -6,6 +6,7 @@ interface IDishProps {
   description: string;
   name: string;
   price: number;
+  photo: string | null;
   isCustomer?: boolean;
   orderStarted?: boolean;
   options?: restaurant_restaurant_restaurant_menu_options[] | null;
@@ -20,6 +21,7 @@ export const Dish: React.FC<IDishProps> = ({
   description,
   name,
   price,
+  photo,
   isCustomer = false,
   orderStarted = false,
   options,
@@ -50,34 +52,38 @@ export const Dish: React.FC<IDishProps> = ({
     // restaurantDetail 에서 오더 스타트해야 클릭할수있게됨!
     // 오더 스타트하고 아이탬클릭시 보더가 색깔이생김!
     <div
-      className={` px-8 py-4 border cursor-pointer  transition-all ${
+      className={` px-8 py-4 border cursor-pointer flex justify-between transition-all ${
         isSelected ? "border-gray-800" : " hover:border-gray-800"
       }`}
     >
-      <div className="mb-5">
-        <h3 className="text-lg font-medium flex items-center ">
-          {name}
-          {orderStarted && (
-            <button
-              className={`ml-3 py-1 px-3 focus:outline-none text-sm  text-white ${
-                isSelected ? "bg-red-500" : " bg-lime-600"
-              }`}
-              onClick={onClick}
-            >
-              {isSelected ? "Remove" : "Add"}
-            </button>
-          )}
-        </h3>
-        <h4 className="font-medium">{description}</h4>
-      </div>
-      <span>${price}</span>
-      {isCustomer && options && options?.length !== 0 && (
-        <div>
-          <h5 className="mt-8 mb-3 font-medium">Dish Options:</h5>
-          <div className="grid gap-2  justify-start">{dishOptions}</div>
-          {/* 컴포넌트 밖에서 만들고 여기로 가져올수도있다! */}
+      <div>
+        <div className="mb-5 ">
+          <h3 className="text-lg font-medium flex items-center ">
+            {name}
+            {orderStarted && (
+              <button
+                className={`ml-3 py-1 px-3 focus:outline-none text-sm  text-white ${
+                  isSelected ? "bg-red-500" : " bg-lime-600"
+                }`}
+                onClick={onClick}
+              >
+                {isSelected ? "Remove" : "Add"}
+              </button>
+            )}
+          </h3>
+          <h4 className="font-medium">{description}</h4>
         </div>
-      )}
+        <span>${price}</span>
+
+        {isCustomer && options && options?.length !== 0 && (
+          <div>
+            <h5 className="mt-8 mb-3 font-medium">Dish Options:</h5>
+            <div className="grid gap-2  justify-start">{dishOptions}</div>
+            {/* 컴포넌트 밖에서 만들고 여기로 가져올수도있다!! */}
+          </div>
+        )}
+      </div>
+      <div>{photo !== null && <img src={photo} alt="dishpic"></img>}</div>
     </div>
   );
 };

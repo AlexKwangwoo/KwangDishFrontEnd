@@ -287,6 +287,7 @@ export const RestaurantDetail = () => {
               options={dish.options}
               addItemToOrder={addItemToOrder}
               removeFromOrder={removeFromOrder}
+              photo={dish.photo}
             >
               {/* 여기 밑에 쓰는 부분이 children에 Dish컴포넌트에 들어갈것임!! */}
               {dish.options?.map((option, index) => (

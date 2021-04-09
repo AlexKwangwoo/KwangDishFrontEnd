@@ -135,6 +135,7 @@ export const MyRestaurant = () => {
                   description={dish.description}
                   price={dish.price}
                   isCustomer={true}
+                  photo={dish.photo}
                   options={dish.options}
                 />
               ))}

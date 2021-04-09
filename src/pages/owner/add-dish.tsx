@@ -25,6 +25,7 @@ interface IForm {
   name: string;
   price: string;
   description: string;
+  photo: string;
   [key: string]: string;
 }
 
@@ -60,32 +61,62 @@ export const AddDish = () => {
     mode: "onChange",
   });
 
-  const onSubmit = () => {
-    const { name, price, description, ...rest } = getValues();
-    console.log(rest);
-    //...rest ...left 아무것이나 하면됨! 나머지 것들을 담아줄것임!
-    // console.log(rest);
-    const optionObjects = optionsNumber.map((theId) => ({
-      //optionsNumber그냥 날짜로 만들어진 아이디일뿐!!
-      // 1617047433521-optionExtra: "2"
-      // 1617047433521-optionName: "hot"
-      //이런식으로 값을 가지는데.. 밑에걸로 2, hot 값을 받을수있음!
-      name: rest[`${theId}-optionName`],
-      //하나하나값의 키값을 넣어 찾고자하는 값을 받는다!
-      extra: +rest[`${theId}-optionExtra`],
-    }));
-    createDishMutation({
-      variables: {
-        input: {
-          name,
-          price: +price,
-          description,
-          restaurantId: +restaurantId,
-          options: optionObjects,
+  const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const onSubmit = async () => {
+    try {
+      // setUploading(true);
+      const { name, price, description, file, ...rest } = getValues();
+
+      const actualFile = file[0];
+      const formBody = new FormData();
+      formBody.append("file", actualFile);
+
+      const { url: coverImg } = await //파일을 전송하고 url을 받을 것임!
+      //   await fetch("https://kwang-eats-backend.herokuapp.com/uploads/", {
+      //await fetch("http://localhost:4000/uploads/", {
+      (
+        await fetch(
+          process.env.NODE_ENV === "production"
+            ? "https://kwang-eats-backend.herokuapp.com/uploads/"
+            : "http://localhost:4000/uploads/",
+          {
+            method: "POST",
+            body: formBody,
+          }
+        )
+      ).json();
+      setImageUrl(coverImg);
+      console.log("coverImg", coverImg);
+      console.log(rest);
+      //...rest ...left 아무것이나 하면됨! 나머지 것들을 담아줄것임!
+      // console.log(rest);
+      const optionObjects = optionsNumber.map((theId) => ({
+        //optionsNumber그냥 날짜로 만들어진 아이디일뿐!!
+        // 1617047433521-optionExtra: "2"
+        // 1617047433521-optionName: "hot"
+        //이런식으로 값을 가지는데.. 밑에걸로 2, hot 값을 받을수있음!
+        name: rest[`${theId}-optionName`],
+        //하나하나값의 키값을 넣어 찾고자하는 값을 받는다!
+        extra: +rest[`${theId}-optionExtra`],
+      }));
+      createDishMutation({
+        variables: {
+          input: {
+            name,
+            price: +price,
+            description,
+            photo: coverImg,
+            restaurantId: +restaurantId,
+            options: optionObjects,
+          },
         },
-      },
-    });
-    history.goBack();
+      });
+      history.goBack();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const [optionsNumber, setOptionsNumber] = useState<number[]>([]);
@@ -136,6 +167,14 @@ export const AddDish = () => {
           placeholder="Description"
           ref={register({ required: "Description is required." })}
         />
+        <div>
+          <input
+            type="file"
+            name="file"
+            accept="image/*"
+            ref={register({ required: false })}
+          />
+        </div>
         <div className="my-10">
           <h4 className="font-medium  mb-3 text-lg">Dish Options</h4>
           <span
