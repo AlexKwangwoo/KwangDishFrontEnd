@@ -386,8 +386,8 @@ export const Restaurants = () => {
         </div>
       ) : (
         <div className="font-bold text-4xl max-w-screen-2xl pt-48 mx-auto flex items-center justify-center">
-          💕Thank you for using Kwang
-          <span className="text-yellow-400">Dish</span>
+          Thank you for using Kwang
+          <span className="text-yellow-400">Dish...</span>
           💕
         </div>
       )}

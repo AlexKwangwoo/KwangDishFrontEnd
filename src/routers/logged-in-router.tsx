@@ -17,6 +17,14 @@ import { AddDish } from "../pages/owner/add-dish";
 import { Order } from "../pages/order";
 import { Dashboard } from "../pages/driver/dashboard";
 import { UserRole } from "../generated/globalTypes";
+import {
+  faBed,
+  faCalendarTimes,
+  faTimes,
+  faTimesCircle,
+  faWalking,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // const ClientRoutes = [
 //   <Route key={1} path="/" exact>
@@ -91,8 +99,20 @@ export const LoggedInRouter = () => {
   console.log(data);
   if (!data || loading || error) {
     return (
-      <div className="h-screen flex justify-center items-center">
-        <span className="font-medium text-xl tracking-wide">Loading...</span>
+      <div>
+        <div className="h-screen flex flex-col justify-center items-center">
+          <div>
+            <FontAwesomeIcon
+              icon={faWalking}
+              className="text-4xl mr-2 text-yellow-600"
+            />
+          </div>
+          <span className="font-medium text-2xl tracking-wide text-center">
+            Database is waking up now from sleep
+            <br />
+            <span className="text-lg">Please wait a moment..💕</span>
+          </span>
+        </div>
       </div>
     );
   }
