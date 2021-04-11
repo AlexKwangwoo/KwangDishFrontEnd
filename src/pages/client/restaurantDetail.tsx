@@ -13,9 +13,12 @@ import {
   faList,
   faPizzaSlice,
   faSearch,
+  faShoppingBasket,
+  faShoppingCart,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "react-awesome-modal";
 
 const RESTAURANT_QUERY = gql`
   query restaurant($input: RestaurantInput!) {
@@ -49,6 +52,15 @@ interface IRestaurantParams {
 }
 
 export const RestaurantDetail = () => {
+  const [visible, setVisible] = useState(false);
+  const openModal = () => {
+    console.log(visible);
+    setVisible(true);
+  };
+  const closeModal = () => {
+    setVisible(false);
+  };
+
   const params = useParams<IRestaurantParams>();
   const { loading, data } = useQuery<restaurant, restaurantVariables>(
     RESTAURANT_QUERY,
@@ -64,6 +76,7 @@ export const RestaurantDetail = () => {
 
   const [orderStarted, setOrderStarted] = useState(false);
   const [orderItems, setOrderItems] = useState<CreateOrderItemInput[]>([]);
+  const [orderItemPrice, setOrderItemPrice] = useState<number>();
   const triggerStartOrder = () => {
     setOrderStarted(true);
   };
@@ -78,14 +91,17 @@ export const RestaurantDetail = () => {
     return Boolean(getItem(dishId));
   };
 
-  const addItemToOrder = (dishId: number) => {
+  const addItemToOrder = (dishId: number, name: string, price: number) => {
     //선택이 되어있다면 그냥 무시하고 안되있다면 추가해줄것임!
     //여기 메소드는 Dish에서 처리할것임 remove랑!!
     //왜냐하면 isSelected값에 따라 add가 되고 remove가될것이기에.
     if (isSelected(dishId)) {
       return;
     }
-    setOrderItems((current) => [{ dishId, options: [] }, ...current]);
+    setOrderItems((current) => [
+      { dishId, name, price, options: [] },
+      ...current,
+    ]);
   };
 
   const removeFromOrder = (dishId: number) => {
@@ -94,7 +110,13 @@ export const RestaurantDetail = () => {
     );
   };
 
-  const addOptionToItem = (dishId: number, optionName: string) => {
+  const addOptionToItem = (
+    dishId: number,
+    name: string,
+    originalDishPrice: number,
+    optionName: string,
+    extra?: number | null
+  ) => {
     if (!isSelected(dishId)) {
       return;
     }
@@ -123,14 +145,23 @@ export const RestaurantDetail = () => {
       if (!hasOption) {
         removeFromOrder(dishId);
         setOrderItems((current) => [
-          { dishId, options: [{ name: optionName }, ...oldItem.options!] },
+          {
+            dishId,
+            name,
+            price: originalDishPrice,
+            options: [{ name: optionName, extra: extra }, ...oldItem.options!],
+          },
           ...current,
         ]);
       }
     }
   };
 
-  const removeOptionFromItem = (dishId: number, optionName: string) => {
+  const removeOptionFromItem = (
+    dishId: number,
+    name: string,
+    optionName: string
+  ) => {
     if (!isSelected(dishId)) {
       return;
     }
@@ -142,6 +173,7 @@ export const RestaurantDetail = () => {
       setOrderItems((current) => [
         {
           dishId,
+          name,
           options: oldItem.options?.filter(
             (option) => option.name !== optionName
           ),
@@ -195,6 +227,11 @@ export const RestaurantDetail = () => {
   >(CREATE_ORDER_MUTATION, {
     onCompleted,
   });
+
+  // const itemTotal =()=>{
+  //   orderItems.map((item)=>(item.))
+  // }
+
   const triggerConfirmOrder = () => {
     if (placingOrder) {
       return;
@@ -216,6 +253,7 @@ export const RestaurantDetail = () => {
     }
   };
 
+  console.log("orderItems", orderItems);
   return (
     <div>
       <Helmet>
@@ -252,23 +290,65 @@ export const RestaurantDetail = () => {
         {/* <div className="w-full h-10 bg-gradient-to-t from-black to-gray-200"></div> */}
       </div>
 
-      <div className="container pb-32 flex flex-col items-end mt-20">
+      <div className="container pb-32 flex flex-col mt-20">
         {!orderStarted && (
-          <button onClick={triggerStartOrder} className="btn px-10">
-            Start Order
-          </button>
+          <div>
+            <button onClick={triggerStartOrder} className="btn px-10">
+              Start Order
+            </button>
+          </div>
         )}
         {orderStarted && (
-          <div className="flex items-center">
-            <button onClick={triggerConfirmOrder} className="btn px-10 mr-3">
-              Confirm Order
-            </button>
-            <button
-              onClick={triggerCancelOrder}
-              className="btn px-10 bg-black hover:bg-black"
-            >
-              Cancel Order
-            </button>
+          <div className="flex justify-between items-center">
+            <span className="text-xs">
+              <button onClick={openModal} className="btn px-10">
+                Check Order List
+              </button>
+
+              <Modal
+                visible={visible}
+                width="350"
+                height="420"
+                effect="fadeInUp"
+                onClickAway={() => closeModal()}
+              >
+                <div className="p-4">
+                  <div className="flex justify-center items-center mb-4">
+                    <div className="text-2xl font-semibold mr-2">
+                      Your Order List
+                    </div>
+                    <FontAwesomeIcon
+                      icon={faShoppingBasket}
+                      className="text-xl mt-1 text-yellow-500"
+                    />
+                  </div>
+                  {orderItems.map((dish, index) => (
+                    <div key={index} className="mb-2">
+                      <div className="text-lg ">{dish.name}</div>
+
+                      {dish.options !== null &&
+                        dish.options !== undefined &&
+                        dish.options.map((option, index) => (
+                          <div key={index} className="text-base">
+                            - {option.name}
+                          </div>
+                        ))}
+                    </div>
+                  ))}
+                </div>
+              </Modal>
+            </span>
+            <div>
+              <button onClick={triggerConfirmOrder} className="btn px-10 mr-3">
+                Confirm Order
+              </button>
+              <button
+                onClick={triggerCancelOrder}
+                className="btn px-10 bg-black hover:bg-black"
+              >
+                Cancel Order
+              </button>
+            </div>
           </div>
         )}
         <div className="w-full grid mt-16 md:grid-cols-3 gap-x-5 gap-y-10">
@@ -292,10 +372,12 @@ export const RestaurantDetail = () => {
               {/* 여기 밑에 쓰는 부분이 children에 Dish컴포넌트에 들어갈것임!! */}
               {dish.options?.map((option, index) => (
                 <DishOption
+                  originalDishPrice={dish.price}
                   key={index}
+                  name={dish.name}
                   dishId={dish.id}
                   isSelected={isOptionSelected(dish.id, option.name)}
-                  name={option.name}
+                  optionName={option.name}
                   extra={option.extra}
                   addOptionToItem={addOptionToItem}
                   removeOptionFromItem={removeOptionFromItem}

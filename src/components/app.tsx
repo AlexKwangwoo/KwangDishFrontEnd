@@ -4,6 +4,12 @@ import { isLoggedInVar } from "../apollo";
 import { LoggedInRouter } from "../routers/logged-in-router";
 import { LoggedOutRouter } from "../routers/logged-out-router";
 
+// const IS_LOGGED_IN = gql`
+//   query isLoggedIn {
+//     isLoggedIn @client
+//   }
+// `;
+
 //----------여기는 단지 테스트를위해 최상위루트 app을 가져온것!
 //루트 index.tsx에 가서 여기껄 불러와볼것임!
 

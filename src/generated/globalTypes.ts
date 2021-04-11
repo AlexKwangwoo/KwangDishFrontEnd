@@ -48,6 +48,7 @@ export interface CreateOrderInput {
 
 export interface CreateOrderItemInput {
   dishId: number;
+  name: string;
   options?: OrderItemOptionInputType[] | null;
 }
 

@@ -54,9 +54,11 @@ export const AddRestaurant = () => {
 
       setUploading(false);
       const queryResult = client.readQuery({ query: MY_RESTAURANTS_QUERY });
+      //아폴로 클라이언트를 통해 캐쉬에 저장된 쿼리를 읽어온다!
       console.log(queryResult);
       client.writeQuery({
         query: MY_RESTAURANTS_QUERY,
+        //월래 쿼리를 그대로 쓰고 나머지는 형식에 맞게 추가해줘야한다!
         data: {
           myRestaurants: {
             ...queryResult.myRestaurants,

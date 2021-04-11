@@ -66,7 +66,7 @@ const splitLink = split(
     return (
       definition.kind === "OperationDefinition" &&
       definition.operation === "subscription"
-    );
+    ); //subscription은 웹소켓을쓰기에 다르게 받아줘야한다!
   },
   //위의 함수는 false 또는 true를 줄껀데 true면 wsLink고
   //false면 authLink로 갈껏임! //일반 사용은 false받아  authLink로 갈것임!
@@ -87,6 +87,13 @@ export const client = new ApolloClient({
         fields: {
           //밑에 것이 gql로컬스테이스 쿼리이름이다!
           //이걸 사용하기위해서는 gql``를 사용해야한다!! 백앤드까지 안감!
+          //지금은 전역변수로 밑에껄 안썼지만 app에서 쓸려면
+          //const IS_LOGGED_IN = gql`
+          //   query isLoggedIn {
+          //     isLoggedIn @client
+          //   }
+          // `; <--- 이부분을 써줘야함
+          //그다음 usdQuery(IS_LOGGED_IN) 으로 사용하면됨!
           isLoggedIn: {
             read() {
               return isLoggedInVar();

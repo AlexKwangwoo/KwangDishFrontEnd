@@ -10,7 +10,7 @@ interface IDishProps {
   isCustomer?: boolean;
   orderStarted?: boolean;
   options?: restaurant_restaurant_restaurant_menu_options[] | null;
-  addItemToOrder?: (dishId: number) => void;
+  addItemToOrder?: (dishId: number, name: string, price: number) => void;
   removeFromOrder?: (dishId: number) => void;
   isSelected?: boolean;
   // addOptionToItem?: (dishId: number, option: any) => void;
@@ -39,7 +39,7 @@ export const Dish: React.FC<IDishProps> = ({
         //선택되어 있지 않다면 추가할것이고
         //선택되어있다면 제거할것임!
         //리턴 하나 안하나 똑같음!
-        addItemToOrder(id);
+        addItemToOrder(id, name, price);
         return;
       }
       if (isSelected && removeFromOrder) {
