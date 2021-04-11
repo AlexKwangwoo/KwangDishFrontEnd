@@ -83,7 +83,9 @@ export const Dish: React.FC<IDishProps> = ({
           </div>
         )}
       </div>
-      <div>{photo !== null && <img src={photo} alt="dishpic"></img>}</div>
+      <div className="h-40 w-40">
+        {photo !== null && <img src={photo} alt="dishpic"></img>}
+      </div>
     </div>
   );
 };
