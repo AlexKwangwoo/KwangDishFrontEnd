@@ -7,12 +7,12 @@ import sns from "../images/sns.jpg";
 export const Footer = () => {
   return (
     <div className="bg-black sm:w-full sm:h-96 w-full h-96 mt-52 felx flex-col">
-      <div className="flex h-64 pt-8 max-w-screen-2xl  mx-auto  ">
+      <div className="flex h-80 pt-8 max-w-screen-2xl  mx-auto  ">
         <div className=" w-1/2 sm:h-60 border-b-2 border-white">
           <div>
             <img src={KwangLogoWhite} className="w-56 mb-32" alt="Nuber Eats" />
             <div className="flex">
-              <img src={apple} className="w-28 mr-6" alt="Nuber Eats" />
+              <img src={apple} className="w-28 mr-2 sm:mr-6" alt="Nuber Eats" />
               <img src={google} className="w-28" alt="Nuber Eats" />
             </div>
           </div>

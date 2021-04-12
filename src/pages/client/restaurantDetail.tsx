@@ -341,13 +341,13 @@ export const RestaurantDetail = () => {
             <div className="flex flex-col md:flex-none">
               <button
                 onClick={triggerConfirmOrder}
-                className="btn px-10 mb-4 w-56"
+                className="btn px-4 mb-4 w-48"
               >
                 Confirm Order
               </button>
               <button
                 onClick={triggerCancelOrder}
-                className="text-lg font-medium focus:outline-none text-white py-4  transition-colors bg-red-500 hover:bg-red-600 px-10 w-56 "
+                className="w-48 text-lg font-medium focus:outline-none text-white py-4  transition-colors bg-red-500 hover:bg-red-600 px-4"
               >
                 Cancel Order
               </button>
