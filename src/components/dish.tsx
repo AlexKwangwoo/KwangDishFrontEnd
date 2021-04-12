@@ -56,8 +56,8 @@ export const Dish: React.FC<IDishProps> = ({
         isSelected ? "border-gray-800" : " hover:border-gray-800"
       }`}
     >
-      <div>
-        <div className="mb-5 ">
+      <div className="mb-5 w-3/5">
+        <div className="mb-5">
           <h3 className="text-lg font-medium flex items-center ">
             {name}
             {orderStarted && (
@@ -84,7 +84,9 @@ export const Dish: React.FC<IDishProps> = ({
         )}
       </div>
       <div className="h-40 w-40">
-        {photo !== null && <img src={photo} alt="dishpic"></img>}
+        {photo !== null && (
+          <img src={photo} alt="dishpic" className="h-40 w-40"></img>
+        )}
       </div>
     </div>
   );
