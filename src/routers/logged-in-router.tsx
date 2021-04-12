@@ -97,7 +97,7 @@ const driverRoutes = [{ path: "/", component: <Dashboard /> }];
 export const LoggedInRouter = () => {
   const { data, loading, error } = useMe();
   console.log(data);
-  if (!data || loading || error) {
+  if (!data || !loading || error) {
     return (
       <div>
         <div className="h-screen flex flex-col justify-center items-center">
@@ -110,7 +110,11 @@ export const LoggedInRouter = () => {
           <span className="font-medium text-2xl tracking-wide text-center">
             Database is waking up now from sleep
             <br />
-            <span className="text-lg">Please wait a moment..💕</span>
+            <span className="text-lg">
+              Please wait a moment..💕 It takes less than 30 Seconds..🕒
+            </span>
+            <br />
+            <span className="text-sm mr-2"></span>
           </span>
         </div>
       </div>
