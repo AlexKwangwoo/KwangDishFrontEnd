@@ -1,19 +1,12 @@
 import React from "react";
 
 interface IDishOptionProps {
-  originalDishPrice: number;
   isSelected: boolean;
   name: string;
   optionName: string;
   extra?: number | null;
   dishId: number;
-  addOptionToItem: (
-    dishId: number,
-    name: string,
-    originalDishPrice: number,
-    optionName: string,
-    extra?: number | null
-  ) => void;
+  addOptionToItem: (dishId: number, name: string, optionName: string) => void;
   removeOptionFromItem: (
     dishId: number,
     name: string,
@@ -23,7 +16,6 @@ interface IDishOptionProps {
 
 export const DishOption: React.FC<IDishOptionProps> = ({
   isSelected,
-  originalDishPrice,
   name,
   optionName,
   extra,
@@ -35,7 +27,7 @@ export const DishOption: React.FC<IDishOptionProps> = ({
     if (isSelected) {
       removeOptionFromItem(dishId, name, optionName);
     } else {
-      addOptionToItem(dishId, name, originalDishPrice, optionName, extra);
+      addOptionToItem(dishId, name, optionName);
     }
   };
   return (

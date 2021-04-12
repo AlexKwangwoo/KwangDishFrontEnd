@@ -91,17 +91,14 @@ export const RestaurantDetail = () => {
     return Boolean(getItem(dishId));
   };
 
-  const addItemToOrder = (dishId: number, name: string, price: number) => {
+  const addItemToOrder = (dishId: number, name: string) => {
     //선택이 되어있다면 그냥 무시하고 안되있다면 추가해줄것임!
     //여기 메소드는 Dish에서 처리할것임 remove랑!!
     //왜냐하면 isSelected값에 따라 add가 되고 remove가될것이기에.
     if (isSelected(dishId)) {
       return;
     }
-    setOrderItems((current) => [
-      { dishId, name, price, options: [] },
-      ...current,
-    ]);
+    setOrderItems((current) => [{ dishId, name, options: [] }, ...current]);
   };
 
   const removeFromOrder = (dishId: number) => {
@@ -113,9 +110,7 @@ export const RestaurantDetail = () => {
   const addOptionToItem = (
     dishId: number,
     name: string,
-    originalDishPrice: number,
-    optionName: string,
-    extra?: number | null
+    optionName: string
   ) => {
     if (!isSelected(dishId)) {
       return;
@@ -148,8 +143,7 @@ export const RestaurantDetail = () => {
           {
             dishId,
             name,
-            price: originalDishPrice,
-            options: [{ name: optionName, extra: extra }, ...oldItem.options!],
+            options: [{ name: optionName }, ...oldItem.options!],
           },
           ...current,
         ]);
@@ -375,7 +369,6 @@ export const RestaurantDetail = () => {
               {/* 여기 밑에 쓰는 부분이 children에 Dish컴포넌트에 들어갈것임!! */}
               {dish.options?.map((option, index) => (
                 <DishOption
-                  originalDishPrice={dish.price}
                   key={index}
                   name={dish.name}
                   dishId={dish.id}
