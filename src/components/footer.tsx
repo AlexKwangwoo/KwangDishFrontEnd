@@ -6,9 +6,9 @@ import sns from "../images/sns.jpg";
 
 export const Footer = () => {
   return (
-    <div className="bg-black sm:w-full sm:h-96 h-0 w-0 mt-52">
-      <div className="flex p-8 px-48">
-        <div className=" w-1/2 h-0 sm:h-60 border-b-2 border-white">
+    <div className="bg-black sm:w-full sm:h-96 w-full h-96 mt-52 felx flex-col">
+      <div className="flex h-64 pt-8 max-w-screen-2xl  mx-auto  ">
+        <div className=" w-1/2 sm:h-60 border-b-2 border-white">
           <div>
             <img src={KwangLogoWhite} className="w-56 mb-32" alt="Nuber Eats" />
             <div className="flex">
@@ -18,7 +18,7 @@ export const Footer = () => {
           </div>
           <div></div>
         </div>
-        <div className="w-1/4  h-0  sm:h-60 border-b-2 border-white">
+        <div className="w-1/4 sm:h-60 border-b-2 border-white">
           <div className="text-white">
             <div className="mb-2">About Kwang Dish</div>
             <div className="mb-2">Read our blog</div>
@@ -28,7 +28,7 @@ export const Footer = () => {
             <div className="mb-2">Sign up to deliver</div>
           </div>
         </div>
-        <div className="w-1/4  h-0  sm:h-60 border-b-2 border-white">
+        <div className="w-1/4 sm:h-60 border-b-2 border-white">
           <div className="text-white">
             <div className="mb-2">Get Help</div>
             <div className="mb-2">View all cities</div>
@@ -38,7 +38,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex px-48">
+      <div className="flex max-w-screen-2xl mx-auto mt-8">
         <div className="w-1/2 h-30 text-white">
           <img src={sns} className="w-28" alt="Nuber Eats" />
         </div>

@@ -265,7 +265,7 @@ export const RestaurantDetail = () => {
           backgroundImage: `url(${data?.restaurant.restaurant?.coverImg})`,
         }}
       >
-        <div className="text-white w-full pl-10 pb-4 sm:pl-48 sm:pb-30  shadow-inner">
+        <div className="text-white max-w-screen-2xl mx-auto w-full pb-4">
           <div className="max-w-sm bg-gray-700 bg-opacity-50 pl-4 py-4">
             {/* className="xl:w-3/12 pl-10 pt-40 sm:py-8 sm:pl-48" */}
             <h4 className="text-4xl font-semibold mb-3 mx-auto">
@@ -299,7 +299,7 @@ export const RestaurantDetail = () => {
           </div>
         )}
         {orderStarted && (
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-start">
             <span className="text-xs">
               <button onClick={openModal} className="btn px-10">
                 Check Order List
@@ -338,13 +338,16 @@ export const RestaurantDetail = () => {
                 </div>
               </Modal>
             </span>
-            <div>
-              <button onClick={triggerConfirmOrder} className="btn px-10 mr-3">
+            <div className="flex flex-col md:flex-none">
+              <button
+                onClick={triggerConfirmOrder}
+                className="btn px-10 mb-4 w-56"
+              >
                 Confirm Order
               </button>
               <button
                 onClick={triggerCancelOrder}
-                className="btn px-10 bg-black hover:bg-black"
+                className="text-lg font-medium focus:outline-none text-white py-4  transition-colors bg-red-500 hover:bg-red-600 px-10 w-56 "
               >
                 Cancel Order
               </button>

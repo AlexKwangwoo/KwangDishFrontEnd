@@ -102,7 +102,7 @@ export const MyRestaurant = () => {
         </title>
       </Helmet>
       <div
-        className="  bg-gray-700  py-28 bg-center bg-cover"
+        className="  bg-gray-700 mt-8 py-28 bg-center bg-cover"
         style={{
           backgroundImage: `url(${data?.myRestaurant.restaurant?.coverImg})`,
         }}
@@ -119,7 +119,7 @@ export const MyRestaurant = () => {
           Add Dish &rarr;
         </Link>
 
-        <Link to={``} className=" text-white bg-lime-700 py-3 px-10">
+        <Link to={``} className=" text-white bg-yellow-500 py-3 px-10">
           Buy Promotion &rarr;
         </Link>
 

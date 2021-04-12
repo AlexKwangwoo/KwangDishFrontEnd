@@ -203,55 +203,57 @@ export const Restaurants = () => {
       !bbqLoading &&
       bbqData?.category?.restaurants !== undefined &&
       bbqData?.category?.restaurants !== undefined ? (
-        <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
-          <div className="max-w-full border-b-2 pb-8">
-            <div className="flex justify-around max-w-sm mx-auto ">
-              {data?.allCategories.categories?.map((category) => (
-                <Link key={category.id} to={`/category/${category.slug}`}>
-                  <div className="flex flex-col group items-center cursor-pointer mx-5">
-                    <div
-                      className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
-                      style={{ backgroundImage: `url(${category.coverImg})` }}
-                    ></div>
-                    <span className="mt-1 text-sm text-center font-medium">
-                      {category.name}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="text-4xl font-semibold mt-6">In a rush?</div>
-            <div className="text-base mt-2 mb-6">
-              Here's the fastest delivery for you
-            </div>
-            <div className="-mr-4">
-              <SliderFixed {...settings}>
-                {cateData?.category?.restaurants !== undefined &&
-                  cateData?.category?.restaurants?.map((restaurant) => (
-                    <div className="pr-4" key={restaurant.id}>
-                      <Restaurant
-                        key={restaurant.id}
-                        id={restaurant.id + ""}
-                        //이렇게 하면 숫자에서 문자로 변함!
-                        coverImg={restaurant.coverImg}
-                        name={restaurant.name}
-                        categoryName={restaurant.category?.name}
-                      />
+        <div>
+          <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+            <div className="max-w-full border-b-2 pb-8">
+              <div className="grid grid-cols-5 max-w-2xl sm:flex sm:justify-around sm:max-w-sm mx-auto ">
+                {data?.allCategories.categories?.map((category) => (
+                  <Link key={category.id} to={`/category/${category.slug}`}>
+                    <div className="flex flex-col group items-center cursor-pointer mx-5">
+                      <div
+                        className=" w-16 h-16 bg-cover group-hover:bg-gray-100 rounded-full"
+                        style={{ backgroundImage: `url(${category.coverImg})` }}
+                      ></div>
+                      <span className="mt-1 text-sm text-center font-medium">
+                        {category.name}
+                      </span>
                     </div>
-                  ))}
-              </SliderFixed>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
+
+            <div>
+              <div className="text-4xl font-semibold mt-6">In a rush?</div>
+              <div className="text-base mt-2 mb-6">
+                Here's the fastest delivery for you
+              </div>
+              <div className="">
+                <SliderFixed {...settings}>
+                  {cateData?.category?.restaurants !== undefined &&
+                    cateData?.category?.restaurants?.map((restaurant) => (
+                      <div className="pr-4" key={restaurant.id}>
+                        <Restaurant
+                          key={restaurant.id}
+                          id={restaurant.id + ""}
+                          //이렇게 하면 숫자에서 문자로 변함!
+                          coverImg={restaurant.coverImg}
+                          name={restaurant.name}
+                          categoryName={restaurant.category?.name}
+                        />
+                      </div>
+                    ))}
+                </SliderFixed>
+              </div>
+            </div>
             <div className="text-4xl font-semibold mt-6">Orders near you</div>
             <div className="text-base mt-2 mb-6">
               Your neighborhood's latest orders
             </div>
+          </div>
+          <div>
             <div
-              className="-mr-4 bg-gray-600 bg-cover md:bg-contain h-80 shadow-inner bg-bottom"
+              className="-mt-12 bg-gray-600 bg-cover md:bg-contain h-80 shadow-inner bg-bottom"
               style={{ backgroundImage: `url(${cityView})` }}
             >
               <SliderFixed {...settings2}>
@@ -271,65 +273,68 @@ export const Restaurants = () => {
               </SliderFixed>
             </div>
           </div>
-          <div className=" md:flex md:justify-between mt-16 mb-8">
-            <div className="flex flex-col justify-center items-center">
-              <div
-                className="rounded-full h-52 w-52 bg-cover "
-                style={{
-                  backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS9DYXRlZ29yeUVudHJ5UG9pbnRJbGx1c3RyYXRpb25fMTY4eDEzNXB4QDN4LmpwZw==)`,
-                }}
-              ></div>
-              <div className="font-semibold mt-2 mb-4">Latest Deals</div>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <div
-                className="rounded-full h-52 w-52 bg-cover "
-                style={{
-                  backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NlYXJjaF9ob21lL2Vzc2VudGlhbHMuanBn)`,
-                }}
-              ></div>
-              <div className="font-semibold mt-2 mb-4">Everyday Essentials</div>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <div
-                className="rounded-full h-52 w-52 bg-cover "
-                style={{
-                  backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS9kMTE2NDcxNGEyNTlkMTgwNDcxZTIwMjU0YjgyMTFmNw==)`,
-                }}
-              ></div>
-              <div className="font-semibold mt-2 mb-4">Bakery</div>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <div
-                className="rounded-full h-52 w-52 bg-cover "
-                style={{
-                  backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS8wYmM5Y2ExOWEwMmUzYmQwM2YyMzk1YzhjZjhhM2UwYw==)`,
-                }}
-              ></div>
-              <div className="font-semibold mt-2 mb-4">
-                Breakfast and Brunch
+          <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
+            <div className=" md:flex md:justify-between mt-16 mb-8">
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="rounded-full h-52 w-52 bg-cover "
+                  style={{
+                    backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS9DYXRlZ29yeUVudHJ5UG9pbnRJbGx1c3RyYXRpb25fMTY4eDEzNXB4QDN4LmpwZw==)`,
+                  }}
+                ></div>
+                <div className="font-semibold mt-2 mb-4">Latest Deals</div>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="rounded-full h-52 w-52 bg-cover "
+                  style={{
+                    backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NlYXJjaF9ob21lL2Vzc2VudGlhbHMuanBn)`,
+                  }}
+                ></div>
+                <div className="font-semibold mt-2 mb-4">
+                  Everyday Essentials
+                </div>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="rounded-full h-52 w-52 bg-cover "
+                  style={{
+                    backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS9kMTE2NDcxNGEyNTlkMTgwNDcxZTIwMjU0YjgyMTFmNw==)`,
+                  }}
+                ></div>
+                <div className="font-semibold mt-2 mb-4">Bakery</div>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="rounded-full h-52 w-52 bg-cover "
+                  style={{
+                    backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS8wYmM5Y2ExOWEwMmUzYmQwM2YyMzk1YzhjZjhhM2UwYw==)`,
+                  }}
+                ></div>
+                <div className="font-semibold mt-2 mb-4">
+                  Breakfast and Brunch
+                </div>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="rounded-full h-52 w-52 bg-cover "
+                  style={{
+                    backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS85ZGRhZTAxZDMxNzA4MmE1Y2IzNzI3ZDk0NWE0ODgwYg==)`,
+                  }}
+                ></div>
+                <div className="font-semibold mt-2 mb-4">Cafe</div>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <div
+                  className="rounded-full h-52 w-52 bg-cover "
+                  style={{
+                    backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS9hNWFhOWJiYmEwMTcyMTM0NDQ5YjRhZDQ4NjExZDkyYg==)`,
+                  }}
+                ></div>
+                <div className="font-semibold mt-2 mb-4">American</div>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center">
-              <div
-                className="rounded-full h-52 w-52 bg-cover "
-                style={{
-                  backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS85ZGRhZTAxZDMxNzA4MmE1Y2IzNzI3ZDk0NWE0ODgwYg==)`,
-                }}
-              ></div>
-              <div className="font-semibold mt-2 mb-4">Cafe</div>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <div
-                className="rounded-full h-52 w-52 bg-cover "
-                style={{
-                  backgroundImage: `url(https://cn-geo1.uber.com/image-proc/resize/eats/format=webp/width=550/height=440/quality=70/srcb64=aHR0cHM6Ly9kdXl0NGg5bmZuajUwLmNsb3VkZnJvbnQubmV0L3NrdS9hNWFhOWJiYmEwMTcyMTM0NDQ5YjRhZDQ4NjExZDkyYg==)`,
-                }}
-              ></div>
-              <div className="font-semibold mt-2 mb-4">American</div>
-            </div>
-          </div>
-          {/* <div>
+            {/* <div>
           <div className="text-4xl font-semibold">Today's offers</div>
         </div>
         <div>
@@ -341,47 +346,48 @@ export const Restaurants = () => {
         <div>
           <div className="text-4xl font-semibold">Family favorites</div>
         </div> */}
-          <div>
-            <div className="text-4xl font-semibold">All Stores</div>
-          </div>
-          <div className="grid mt-6 md:grid-cols-3 gap-x-5 gap-y-10">
-            {data?.restaurants.results?.map((restaurant) => (
-              <Restaurant
-                key={restaurant.id}
-                id={restaurant.id + ""}
-                //이렇게 하면 숫자에서 문자로 변함!
-                coverImg={restaurant.coverImg}
-                name={restaurant.name}
-                categoryName={restaurant.category?.name}
-              />
-            ))}
-          </div>
-          <div className="grid grid-cols-3 -mb-20 text-center max-w-md items-center mx-auto mt-10">
-            {page > 1 ? (
-              <button
-                onClick={onPrevPageClick}
-                className="focus:outline-none font-medium text-2xl"
-              >
-                &larr;
-              </button>
-            ) : (
-              <div></div>
-            )}
+            <div>
+              <div className="text-4xl font-semibold">All Stores</div>
+            </div>
+            <div className="grid mt-6 md:grid-cols-3 gap-x-5 gap-y-10">
+              {data?.restaurants.results?.map((restaurant) => (
+                <Restaurant
+                  key={restaurant.id}
+                  id={restaurant.id + ""}
+                  //이렇게 하면 숫자에서 문자로 변함!
+                  coverImg={restaurant.coverImg}
+                  name={restaurant.name}
+                  categoryName={restaurant.category?.name}
+                />
+              ))}
+            </div>
+            <div className="grid grid-cols-3 -mb-20 text-center max-w-md items-center mx-auto mt-10">
+              {page > 1 ? (
+                <button
+                  onClick={onPrevPageClick}
+                  className="focus:outline-none font-medium text-2xl"
+                >
+                  &larr;
+                </button>
+              ) : (
+                <div></div>
+              )}
 
-            <span>
-              Page {page} of {data?.restaurants.totalPages}
-            </span>
+              <span>
+                Page {page} of {data?.restaurants.totalPages}
+              </span>
 
-            {page !== data?.restaurants.totalPages ? (
-              <button
-                onClick={onNextPageClick}
-                className="focus:outline-none font-medium text-2xl"
-              >
-                &rarr;
-              </button>
-            ) : (
-              <div></div>
-            )}
+              {page !== data?.restaurants.totalPages ? (
+                <button
+                  onClick={onNextPageClick}
+                  className="focus:outline-none font-medium text-2xl"
+                >
+                  &rarr;
+                </button>
+              ) : (
+                <div></div>
+              )}
+            </div>
           </div>
         </div>
       ) : (
