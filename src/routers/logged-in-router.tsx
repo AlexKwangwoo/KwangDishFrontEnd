@@ -97,7 +97,7 @@ const driverRoutes = [{ path: "/", component: <Dashboard /> }];
 export const LoggedInRouter = () => {
   const { data, loading, error } = useMe();
   console.log(data);
-  if (!data || !loading || error) {
+  if (!data || loading || error) {
     return (
       <div>
         <div className="h-screen flex flex-col justify-center items-center">
