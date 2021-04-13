@@ -181,14 +181,14 @@ export const OrdersHistory = () => {
                 <span>Your Deliver Order On Progress</span>
               )}
             </div>
-            <table className="lg:w-3/5 w-full mb-12 table-fixed border rounded-md border-collapse: collapse border-black mx-auto">
+            <table className="lg:w-3/5 w-full mb-12 text-sm md:text-base table-fixed border rounded-md border-collapse: collapse border-black mx-auto">
               <thead className=" text-center border border-black">
                 <tr className="bg-gray-700 text-white">
                   <th className="w-1/5 border border-black">Order ID</th>
                   <th className="w-1/5 border border-black">Status</th>
                   <th className="w-1/5 border border-black">Price</th>
-                  <th className="w-1/5 border border-black">Order Date</th>
-                  <th className="w-1/5 border border-black">Order Detail</th>
+                  <th className="w-1/5 border border-black">Date</th>
+                  <th className="w-1/5 border border-black">Detail</th>
                   <th className="w-1/5 border border-black">Order Page</th>
                 </tr>
               </thead>
@@ -232,14 +232,14 @@ export const OrdersHistory = () => {
               />
               Your Completed Orders
             </div>
-            <table className="lg:w-3/5 w-full mb-12 table-fixed border rounded-md border-collapse: collapse border-black mx-auto">
+            <table className="lg:w-3/5 w-full mb-12 text-sm md:text-base table-fixed border rounded-md border-collapse: collapse border-black mx-auto">
               <thead className=" text-center border border-black">
                 <tr className="bg-gray-700 text-white">
                   <th className="w-1/5 border border-black">Order ID</th>
                   <th className="w-1/5 border border-black">Status</th>
                   <th className="w-1/5 border border-black">Price</th>
-                  <th className="w-1/5 border border-black">Order Date</th>
-                  <th className="w-1/5 border border-black">Order Detail</th>
+                  <th className="w-1/5 border border-black">Date</th>
+                  <th className="w-1/5 border border-black">Detail</th>
                   <th className="w-1/5 border border-black">Order Page</th>
                 </tr>
               </thead>
@@ -248,7 +248,7 @@ export const OrdersHistory = () => {
                   <tr
                     key={index}
                     className={`border border-black text-center ${
-                      index % 2 == 1 ? "bg-green-100" : ""
+                      index % 2 == 1 ? "bg-blue-200" : ""
                     }`}
                   >
                     <td className="border border-black">{order.id}</td>

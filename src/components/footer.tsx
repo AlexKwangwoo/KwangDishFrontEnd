@@ -10,15 +10,23 @@ export const Footer = () => {
       <div className="flex h-80 pt-8 max-w-screen-2xl  mx-auto  ">
         <div className=" w-1/2 sm:h-60 border-b-2 border-white">
           <div>
-            <img src={KwangLogoWhite} className="w-56 mb-32" alt="Nuber Eats" />
+            <img
+              src={KwangLogoWhite}
+              className="w-44 md:w-56 mb-32"
+              alt="Nuber Eats"
+            />
             <div className="flex">
-              <img src={apple} className="w-28 mr-2 sm:mr-6" alt="Nuber Eats" />
-              <img src={google} className="w-28" alt="Nuber Eats" />
+              <img
+                src={apple}
+                className="w-20 md:w-28 mr-2 sm:mr-6"
+                alt="Nuber Eats"
+              />
+              <img src={google} className="w-20 md:w-28" alt="Nuber Eats" />
             </div>
           </div>
           <div></div>
         </div>
-        <div className="w-1/4 sm:h-60 border-b-2 border-white">
+        <div className="w-1/4 text-sm md:text-base sm:h-60 border-b-2 border-white">
           <div className="text-white">
             <div className="mb-2">About Kwang Dish</div>
             <div className="mb-2">Read our blog</div>
@@ -28,7 +36,7 @@ export const Footer = () => {
             <div className="mb-2">Sign up to deliver</div>
           </div>
         </div>
-        <div className="w-1/4 sm:h-60 border-b-2 border-white">
+        <div className="w-1/4  text-sm md:text-base sm:h-60 border-b-2 border-white">
           <div className="text-white">
             <div className="mb-2">Get Help</div>
             <div className="mb-2">View all cities</div>
@@ -42,7 +50,7 @@ export const Footer = () => {
         <div className="w-1/2 h-30 text-white">
           <img src={sns} className="w-28" alt="Nuber Eats" />
         </div>
-        <div className="w-1/2 h-30 text-white flex justify-end">
+        <div className="w-1/2 h-30 text-sm md:text-base text-white flex justify-end">
           <div className="mr-4">Privacy Policy</div>
           <div className="mr-4">Terms</div>
           <div>Pricing</div>
