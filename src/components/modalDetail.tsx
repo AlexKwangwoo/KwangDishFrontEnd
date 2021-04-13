@@ -18,10 +18,15 @@ export const ModalDetail = () => {
     // history.push({
     //   pathname: "/edit-profile",
     // });
-    console.log("haha");
     window.location.assign("/edit-profile");
   };
 
+  const checkOrdersButton = () => {
+    // history.push({
+    //   pathname: "/edit-profile",
+    // });
+    window.location.assign("/clientOrders");
+  };
   const onClickLoggedOut = () => {
     localStorage.removeItem(LOCALSTORAGE_TOKEN);
     window.location.assign("/");
@@ -49,13 +54,19 @@ export const ModalDetail = () => {
           </div>
         </div>
         <div className="flex items-center mt-8">
-          <div className="w-6">
+          <div className="w-6 ">
             <FontAwesomeIcon
               icon={faCalculator}
               className="text-xl cursor-pointer"
+              onClick={() => checkOrdersButton()}
             />
           </div>
-          <div className="text-base font-semibold ml-2">Orders</div>
+          <div
+            onClick={() => checkOrdersButton()}
+            className="text-base font-semibold ml-2 cursor-pointer"
+          >
+            Orders
+          </div>
         </div>
         <div className="flex items-center mt-6">
           <div className="w-6">

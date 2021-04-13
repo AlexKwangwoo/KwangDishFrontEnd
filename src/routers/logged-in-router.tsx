@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Restaurants } from "../pages/client/restaurants";
 import { useMe } from "../hooks/useMe";
 import { Header } from "../components/header";
+import { ClientOrders } from "../components/clientOrders";
 import { Footer } from "../components/footer";
 import { ConfirmEmail } from "../pages/user/confirm-email";
 import { EditProfile } from "../pages/user/edit-profile";
@@ -75,6 +76,10 @@ const clientRoutes = [
     path: "/restaurants/:id",
     //:~ 뒤에 나용이 파라미터에서 변수로 받을 변수명임!!!!
     component: <RestaurantDetail />,
+  },
+  {
+    path: "/clientOrders",
+    component: <ClientOrders />,
   },
 ];
 
