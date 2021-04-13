@@ -253,7 +253,7 @@ export const Restaurants = () => {
           </div>
           <div>
             <div
-              className="-mt-12 bg-gray-600 bg-cover md:bg-contain h-80 shadow-inner bg-bottom"
+              className="-mt-12 bg-gray-600 bg-cover lg:bg-contain h-80 shadow-inner bg-center"
               style={{ backgroundImage: `url(${cityView})` }}
             >
               <SliderFixed {...settings2}>
@@ -274,7 +274,7 @@ export const Restaurants = () => {
             </div>
           </div>
           <div className="max-w-screen-2xl pb-20 mx-auto mt-8">
-            <div className=" md:flex md:justify-between mt-16 mb-8">
+            <div className=" lg:flex lg:justify-between mt-16 mb-8">
               <div className="flex flex-col justify-center items-center">
                 <div
                   className="rounded-full h-52 w-52 bg-cover "

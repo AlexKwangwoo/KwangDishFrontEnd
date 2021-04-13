@@ -10,12 +10,8 @@ import { CreateOrderItemInput } from "../../generated/globalTypes";
 import { createOrder, createOrderVariables } from "../../generated/createOrder";
 import {
   faAddressBook,
-  faList,
   faPizzaSlice,
-  faSearch,
   faShoppingBasket,
-  faShoppingCart,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-awesome-modal";

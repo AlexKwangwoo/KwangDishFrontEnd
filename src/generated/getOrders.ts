@@ -3,11 +3,16 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetOrdersInput } from "./globalTypes";
+import { GetOrdersInput, OrderStatus } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: getOrders
 // ====================================================
+
+export interface getOrders_getOrders_orders_restaurant {
+  __typename: "Restaurant";
+  name: string;
+}
 
 export interface getOrders_getOrders_orders_items_dish {
   __typename: "Dish";
@@ -31,8 +36,11 @@ export interface getOrders_getOrders_orders_items {
 
 export interface getOrders_getOrders_orders {
   __typename: "Order";
+  status: OrderStatus;
   id: number;
   total: number | null;
+  createdAt: any;
+  restaurant: getOrders_getOrders_orders_restaurant | null;
   items: getOrders_getOrders_orders_items[];
 }
 

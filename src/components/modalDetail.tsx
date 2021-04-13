@@ -25,7 +25,7 @@ export const ModalDetail = () => {
     // history.push({
     //   pathname: "/edit-profile",
     // });
-    window.location.assign("/clientOrders");
+    window.location.assign("/ordersHistory");
   };
   const onClickLoggedOut = () => {
     localStorage.removeItem(LOCALSTORAGE_TOKEN);

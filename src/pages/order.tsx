@@ -120,7 +120,7 @@ export const Order = () => {
       <Helmet>
         <title>Order #{params.id}</title>
       </Helmet>
-      <div className="border border-gray-800 w-full max-w-screen-sm flex flex-col justify-center">
+      <div className="border border-gray-800 w-full pb-4 max-w-screen-sm flex flex-col justify-center">
         <h4 className="bg-gray-800 w-full py-5 text-white text-center text-xl">
           Order #{params.id}
         </h4>
@@ -129,29 +129,33 @@ export const Order = () => {
         </h5>
         <div className="p-5 text-xl grid gap-6">
           <div className="border-t pt-5 border-gray-700">
-            Prepared By:{" "}
+            Prepared By :
             <span className="font-medium">
               {data?.getOrder.order?.restaurant?.name}
             </span>
           </div>
           <div className="border-t pt-5 border-gray-700 ">
-            Deliver To:{" "}
+            Deliver To :
             <span className="font-medium">
               {data?.getOrder.order?.customer?.email}
             </span>
           </div>
           <div className="border-t border-b py-5 border-gray-700">
-            Driver:{" "}
+            Driver :
             <span className="font-medium">
               {data?.getOrder.order?.driver?.email || "Not yet."}
             </span>
           </div>
 
           {userData?.me.role === UserRole.Client && (
-            <span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
-              Status: {data?.getOrder.order?.status}
+            <span className=" text-center mt-5 text-2xl ">
+              Status :
+              <span className="text-yellow-500 ml-1">
+                {data?.getOrder.order?.status}
+              </span>
             </span>
           )}
+
           {userData?.me.role === UserRole.Owner && (
             <>
               {data?.getOrder.order?.status === OrderStatus.Pending && (
@@ -172,12 +176,16 @@ export const Order = () => {
               )}
               {data?.getOrder.order?.status !== OrderStatus.Cooking &&
                 data?.getOrder.order?.status !== OrderStatus.Pending && (
-                  <span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
-                    Status: {data?.getOrder.order?.status}
+                  <span className=" text-center mt-5 text-2xl ">
+                    Status :
+                    <span className="text-yellow-500 ml-1">
+                      {data?.getOrder.order?.status}
+                    </span>
                   </span>
                 )}
             </>
           )}
+
           {/* 드라이버가 받으면 상태를 바꿀것임! */}
           {userData?.me.role === UserRole.Delivery && (
             <>
@@ -200,8 +208,12 @@ export const Order = () => {
             </>
           )}
           {data?.getOrder.order?.status === OrderStatus.Delivered && (
-            <span className=" text-center mt-5 mb-3  text-2xl text-lime-600">
-              Thank you for using Kwang Eats
+            <span className=" text-center mb-3 -mt-1 text-lg ">
+              Thank you for using
+              <span className="text-yellow-400 font-semibold ml-1">
+                Kwang Eats..
+              </span>
+              💕
             </span>
           )}
         </div>
