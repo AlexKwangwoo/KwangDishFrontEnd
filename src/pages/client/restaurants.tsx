@@ -2,7 +2,6 @@ import { gql, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { Restaurant } from "../../components/restaurant";
 import { RestaurantMoving } from "../../components/restaurantMoving";
-import { url } from "inspector";
 import {
   restaurantsPageQuery,
   restaurantsPageQueryVariables,

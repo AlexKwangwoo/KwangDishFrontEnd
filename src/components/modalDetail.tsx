@@ -32,6 +32,12 @@ export const ModalDetail = () => {
     window.location.assign("/");
     //리로드하면서 루트페이지로 가게해준다!
   };
+  const checkFavoriteRestaurantsButton = () => {
+    // history.push({
+    //   pathname: "/edit-profile",
+    // });
+    window.location.assign("/favoriteRestaurants");
+  };
 
   return (
     <div className="mx-auto p-6 shadow-inner">
@@ -73,9 +79,15 @@ export const ModalDetail = () => {
             <FontAwesomeIcon
               icon={faHeart}
               className="text-xl cursor-pointer"
+              onClick={() => checkFavoriteRestaurantsButton()}
             />
           </div>
-          <div className="text-base font-semibold ml-2">Favorites</div>
+          <div
+            onClick={() => checkFavoriteRestaurantsButton()}
+            className="text-base font-semibold ml-2 cursor-pointer"
+          >
+            Favorites
+          </div>
         </div>
         <div className="flex items-center mt-6">
           <div className="w-6">

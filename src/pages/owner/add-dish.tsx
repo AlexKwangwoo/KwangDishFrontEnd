@@ -61,8 +61,8 @@ export const AddDish = () => {
     mode: "onChange",
   });
 
-  const [uploading, setUploading] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  // const [uploading, setUploading] = useState(false);
+  // const [imageUrl, setImageUrl] = useState("");
 
   const onSubmit = async () => {
     try {
@@ -87,9 +87,9 @@ export const AddDish = () => {
           }
         )
       ).json();
-      setImageUrl(coverImg);
-      console.log("coverImg", coverImg);
-      console.log(rest);
+      // setImageUrl(coverImg);
+      // console.log("coverImg", coverImg);
+      // console.log(rest);
       //...rest ...left 아무것이나 하면됨! 나머지 것들을 담아줄것임!
       // console.log(rest);
       const optionObjects = optionsNumber.map((theId) => ({

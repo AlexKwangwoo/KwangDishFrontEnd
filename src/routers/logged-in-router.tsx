@@ -18,14 +18,9 @@ import { AddDish } from "../pages/owner/add-dish";
 import { Order } from "../pages/order";
 import { Dashboard } from "../pages/driver/dashboard";
 import { UserRole } from "../generated/globalTypes";
-import {
-  faBed,
-  faCalendarTimes,
-  faTimes,
-  faTimesCircle,
-  faWalking,
-} from "@fortawesome/free-solid-svg-icons";
+import { faWalking } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FavoriteRestaurants } from "../pages/user/favorite-restaurants";
 
 // const ClientRoutes = [
 //   <Route key={1} path="/" exact>
@@ -77,6 +72,11 @@ const clientRoutes = [
     //:~ 뒤에 나용이 파라미터에서 변수로 받을 변수명임!!!!
     component: <RestaurantDetail />,
   },
+  {
+    path: "/favoriteRestaurants",
+    //:~ 뒤에 나용이 파라미터에서 변수로 받을 변수명임!!!!
+    component: <FavoriteRestaurants />,
+  },
 ];
 
 const commonRoutes = [
@@ -101,7 +101,6 @@ const driverRoutes = [{ path: "/", component: <Dashboard /> }];
 
 export const LoggedInRouter = () => {
   const { data, loading, error } = useMe();
-  console.log(data);
   if (!data || loading || error) {
     return (
       <div>

@@ -21,6 +21,10 @@ export enum UserRole {
   Owner = "Owner",
 }
 
+export interface AddFavoriteRestaurantInput {
+  restaurantId: number;
+}
+
 export interface CategoryInput {
   page?: number | null;
   slug: string;
@@ -57,6 +61,10 @@ export interface CreateRestaurantInput {
   coverImg: string;
   address: string;
   categoryName: string;
+}
+
+export interface DeleteFavoriteRestaurantInput {
+  restaurantId: number;
 }
 
 export interface DishChoiceInputType {

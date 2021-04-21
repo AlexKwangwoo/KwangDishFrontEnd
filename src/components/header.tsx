@@ -1,9 +1,8 @@
-import { faList, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faList, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useMe } from "../hooks/useMe";
-import nuberLogo from "../images/logo.svg";
 import { useForm } from "react-hook-form";
 import KwangLogoBlack from "../images/KwangLogoBlack.png";
 import Modal from "react-awesome-modal";
@@ -29,7 +28,6 @@ export const Header: React.FC = () => {
 
   const [visible, setVisible] = useState(false);
   const openModal = () => {
-    console.log(visible);
     setVisible(true);
   };
   const closeModal = () => {

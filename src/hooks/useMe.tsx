@@ -9,6 +9,15 @@ export const ME_QUERY = gql`
       email
       role
       verified
+      favorite {
+        id
+        name
+        coverImg
+        category {
+          name
+        }
+        address
+      }
     }
   }
 `;

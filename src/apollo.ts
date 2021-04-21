@@ -24,6 +24,9 @@ export const authTokenVar = makeVar(token);
 
 //디비에서 query.를 사용해 연결할때는 request header를 가지고
 //subscription을 사용하면 connection의 context를 사용했다!
+// 1. apollo에서 header에 토큰을 붙여주거나 웹소켓의
+//connection.context에 토큰을 넣어줌!
+// (\*백앤드만 만질때는 그래프큐엘열어서header 넣어줄수있었음!)
 const wsLink = new WebSocketLink({
   uri:
     process.env.NODE_ENV === "production"
@@ -76,12 +79,17 @@ const splitLink = split(
 
 export const client = new ApolloClient({
   //link는 연결시켜준다 http, auth, webSocket등
+
+  // 1. apollo에서 header에 토큰을 붙여주거나 웹소켓의
+  //connection.context에 토큰을 넣어줌!
+  // (\*백앤드만 만질때는 그래프큐엘열어서header 넣어줄수있었음!)
   link: splitLink,
   // link: authLink.concat(httpLink),
   //localhost~~ head+ 토큰 정보를 넣어 보내겠음!
   cache: new InMemoryCache({
-    //캐시를 사용하여 localstate를 저장할것임..
-    //백앤드 설정안한것도 프론트앤드에서 만질수있음!
+    //캐시를 사용하여 localstate에 저장할것임..
+    //백앤드 설정안한것도 프론트앤드에서 만질수있음!! 거기에 쿼리만들어!!
+    //저장하는법! 밑에대로 하면됨!
     typePolicies: {
       Query: {
         fields: {
@@ -94,6 +102,7 @@ export const client = new ApolloClient({
           //   }
           // `; <--- 이부분을 써줘야함
           //그다음 usdQuery(IS_LOGGED_IN) 으로 사용하면됨!
+
           isLoggedIn: {
             read() {
               return isLoggedInVar();

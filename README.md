@@ -190,3 +190,6 @@ Dish컴포넌트에 넘겨준다. 또한 add와 remove 함수를 넘겨준다! �
 
 실시간을 위한 웹소캣 설치!
 npm install subscriptions-transport-ws
+
+1. apollo에서 header에 토큰을 붙여주거나 웹소켓의 connection.context에 토큰을 넣어줌!
+   (\*백앤드만 만질때는 그래프큐엘열어서header 넣어줄수있었음!)

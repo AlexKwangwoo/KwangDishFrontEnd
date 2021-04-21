@@ -4,7 +4,7 @@ import { GOOGLE_APIKEY } from "../../constants";
 import { gql, useMutation, useSubscription } from "@apollo/client";
 import { FULL_ORDER_FRAGMENT } from "../../fragments";
 import { coockedOrders } from "../../generated/coockedOrders";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { takeOrder, takeOrderVariables } from "../../generated/takeOrder";
 import { Helmet } from "react-helmet";
 
@@ -31,12 +31,12 @@ interface ICoords {
   lng: number;
 }
 
-interface IDriverProps {
-  lat: number;
-  lng: number;
-  $hover?: any;
-}
-const Driver: React.FC<IDriverProps> = () => <div className="text-lg">🚖</div>;
+// interface IDriverProps {
+//   lat: number;
+//   lng: number;
+//   $hover?: any;
+// }
+// const Driver: React.FC<IDriverProps> = () => <div className="text-lg">🚖</div>;
 
 export const Dashboard = () => {
   const [driverCoords, setDriverCoords] = useState<ICoords>({ lng: 0, lat: 0 });

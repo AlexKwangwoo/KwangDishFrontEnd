@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Dish } from "../../components/dish";
 import { DishOption } from "../../components/dish-option";
@@ -10,11 +10,20 @@ import { CreateOrderItemInput } from "../../generated/globalTypes";
 import { createOrder, createOrderVariables } from "../../generated/createOrder";
 import {
   faAddressBook,
+  faGrinHearts,
+  faHeartbeat,
+  faHeartBroken,
+  faListAlt,
   faPizzaSlice,
   faShoppingBasket,
+  faStarHalfAlt,
+  faThumbsDown,
+  faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-awesome-modal";
+import { useMe } from "../../hooks/useMe";
 
 const RESTAURANT_QUERY = gql`
   query restaurant($input: RestaurantInput!) {
@@ -33,6 +42,24 @@ const RESTAURANT_QUERY = gql`
   ${DISH_FRAGMENT}
 `;
 
+const ADD_FAVORITE_RESTAURANT = gql`
+  mutation addFavoriteRestaurant($input: AddFavoriteRestaurantInput!) {
+    addFavoriteRestaurant(input: $input) {
+      ok
+      error
+    }
+  }
+`;
+
+const DELETE_FAVORITE_RESTAURANT = gql`
+  mutation deleteFavoriteRestaurant($input: DeleteFavoriteRestaurantInput!) {
+    deleteFavoriteRestaurant(input: $input) {
+      ok
+      error
+    }
+  }
+`;
+
 const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($input: CreateOrderInput!) {
     createOrder(input: $input) {
@@ -49,6 +76,26 @@ interface IRestaurantParams {
 
 export const RestaurantDetail = () => {
   const [visible, setVisible] = useState(false);
+  const [like, setLike] = useState<boolean>();
+  const { data: userData } = useMe();
+  const params = useParams<IRestaurantParams>();
+
+  useEffect(() => {
+    if (userData !== undefined) {
+      if (userData.me.favorite) {
+        const favoriteNow = userData.me.favorite;
+        const newFavoriteNow = favoriteNow.filter(
+          (restaurant) => restaurant.id === +params.id
+        );
+        if (newFavoriteNow.length === 0) {
+          setLike(false);
+        } else {
+          setLike(true);
+        }
+      }
+    }
+  }, []);
+
   const openModal = () => {
     console.log(visible);
     setVisible(true);
@@ -57,7 +104,6 @@ export const RestaurantDetail = () => {
     setVisible(false);
   };
 
-  const params = useParams<IRestaurantParams>();
   const { loading, data } = useQuery<restaurant, restaurantVariables>(
     RESTAURANT_QUERY,
     {
@@ -218,6 +264,14 @@ export const RestaurantDetail = () => {
     onCompleted,
   });
 
+  const [addFavoriteRestaurant, { loading: likeLoading }] = useMutation(
+    ADD_FAVORITE_RESTAURANT
+  );
+
+  const [deleteFavoriteRestaurant, { loading: unLikeLoading }] = useMutation(
+    DELETE_FAVORITE_RESTAURANT
+  );
+
   // const itemTotal =()=>{
   //   orderItems.map((item)=>(item.))
   // }
@@ -243,6 +297,28 @@ export const RestaurantDetail = () => {
     }
   };
 
+  const likeButton = () => {
+    addFavoriteRestaurant({
+      variables: {
+        input: {
+          restaurantId: +params.id,
+        },
+      },
+    });
+    setLike(true);
+  };
+
+  const unLikeButton = () => {
+    deleteFavoriteRestaurant({
+      variables: {
+        input: {
+          restaurantId: +params.id,
+        },
+      },
+    });
+    setLike(false);
+  };
+
   console.log("orderItems", orderItems);
   return (
     <div>
@@ -261,20 +337,49 @@ export const RestaurantDetail = () => {
             <h4 className="text-4xl font-semibold mb-3 mx-auto">
               {data?.restaurant.restaurant?.name}
             </h4>
-            <h5 className="text-md font-semibold mb-2">
-              <FontAwesomeIcon
-                icon={faPizzaSlice}
-                className="text-sm mr-2 text-yellow-600"
-              />
-              Category : {data?.restaurant.restaurant?.category?.name}
-            </h5>
-            <h6 className="text-md font-semibold">
-              <FontAwesomeIcon
-                icon={faAddressBook}
-                className="text-sm mr-2 text-green-700"
-              />
-              Address : {data?.restaurant.restaurant?.address}
-            </h6>
+            <div className="flex items-center justify-between">
+              <div>
+                <h5 className="text-md font-semibold mb-2">
+                  <FontAwesomeIcon
+                    icon={faPizzaSlice}
+                    className="text-sm mr-2 text-yellow-600"
+                  />
+                  Category : {data?.restaurant.restaurant?.category?.name}
+                </h5>
+                <h6 className="text-md font-semibold">
+                  <FontAwesomeIcon
+                    icon={faAddressBook}
+                    className="text-sm mr-2 text-green-700"
+                  />
+                  Address : {data?.restaurant.restaurant?.address}
+                </h6>
+              </div>
+              <div className=" w-11 h-11 mr-2 mt-4 flex justify-center">
+                {like ? (
+                  <FontAwesomeIcon
+                    icon={faHeartbeat}
+                    className="text-2xl text-white mt-5 cursor-pointer"
+                    onClick={() => unLikeButton()}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    className="text-2xl text-white mt-5 cursor-pointer"
+                    onClick={() => likeButton()}
+                  />
+                )}
+                {/* <FontAwesomeIcon
+                  icon={faThumbsUp}
+                  className="text-2xl text-white mt-5 cursor-pointer"
+                  onClick={() => likeButton()}
+                />
+                <FontAwesomeIcon
+                  icon={faThumbsDown}
+                  className="text-2xl text-white mt-5 cursor-pointer"
+                  onClick={() => unLikeButton()}
+                /> */}
+              </div>
+            </div>
           </div>
         </div>
         {/* <div className="w-full h-10 bg-gradient-to-t from-black to-gray-200"></div> */}

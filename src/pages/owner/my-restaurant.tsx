@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery, useSubscription } from "@apollo/client";
+import { gql, useQuery, useSubscription } from "@apollo/client";
 import React, { useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Dish } from "../../components/dish";
