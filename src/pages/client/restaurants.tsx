@@ -22,7 +22,7 @@ import { Slider as SliderFixed } from "infinite-react-carousel";
 
 const RESTAURANTS_QUERY = gql`
   query restaurantsPageQuery($input: RestaurantsInput!) {
-    # 두개의 쿼리가 있지만 레스토랑만 페이지 인풋을 받음!!
+    # 두개의 쿼리가 있지만 레스토랑만 페이지 인풋을 받음!!..
     allCategories {
       ok
       error
