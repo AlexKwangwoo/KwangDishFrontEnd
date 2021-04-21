@@ -9,7 +9,7 @@ export const FavoriteRestaurants = () => {
     <div className="max-w-screen-2xl pb-20 mx-auto mt-20 mb-10">
       <div className="max-w-full pb-8">
         <div className="text-2xl font-bold">My Favorite Restaurants</div>
-        <div className="grid mt-6 md:grid-cols-3 gap-x-5 gap-y-10">
+        <div className="grid mt-6 md:grid-cols-2 gap-x-5 gap-y-10">
           {userData?.me?.favorite !== undefined &&
             userData?.me?.favorite?.map((restaurant) => (
               <div className="pr-4" key={restaurant.id}>
