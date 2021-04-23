@@ -145,11 +145,22 @@ export const Dashboard = () => {
       makeRoute();
     }
   }, [coockedOrdersData]);
+  //cookedOrder가 들어올때마다 드라이버 화면이 다 최신화가 된다!
+  //cookedOrder는 모든 드라이버만 볼수있고 누가 가져가게되면 메시지와 함꼐 refresh
+  //된다.
 
   const history = useHistory();
   const onCompleted = (data: takeOrder) => {
     if (data.takeOrder.ok) {
       history.push(`/orders/${coockedOrdersData?.cookedOrders.id}`);
+    } else {
+      const ok = window.confirm(
+        "The order already has been taken by another driver"
+      );
+
+      if (ok) {
+        window.location.assign("/");
+      }
     }
   };
   const [takeOrderMutation] = useMutation<takeOrder, takeOrderVariables>(
