@@ -95,9 +95,8 @@ const GETALLORDERS_QUERY = gql`
 export const OrdersHistory = () => {
   const { data: userData } = useMe();
 
-  const { loading: allOrdersLoading, data: allOrdersData } = useQuery(
-    GETALLORDERS_QUERY
-  );
+  const { loading: allOrdersLoading, data: allOrdersData } =
+    useQuery(GETALLORDERS_QUERY);
 
   const { loading, data } = useQuery(GETORDERS_QUERY, {
     variables: {
@@ -114,7 +113,7 @@ export const OrdersHistory = () => {
       variables: {
         input: {
           status: "PickedUp",
-          //숫자로 바꿔준다! 숫자로 디비에서 받아주기에..
+          //숫자로 바꿔준다! 숫자로 디비에서 받아주기에.....
         },
       },
     }

@@ -29,12 +29,13 @@ export const Search = () => {
   const [queryName, setQueryName] = useState<string>();
   const location = useLocation();
   const history = useHistory();
-  const [callQuery, { loading, data, called }] = useLazyQuery<
-    //useLazyQuery의 callQuery를 실행해야지만 이 쿼리가 실행되는것임!!
-    //useQuery는 변수보자마자 미리 실행을 시켜놓을것임!!
-    searchRestaurant,
-    searchRestaurantVariables
-  >(SEARCH_RESTAURANT);
+  const [callQuery, { loading, data, called }] =
+    useLazyQuery<
+      //useLazyQuery의 callQuery를 실행해야지만 이 쿼리가 실행되는것임!!
+      //useQuery는 변수보자마자 미리 실행을 시켜놓을것임!!
+      searchRestaurant,
+      searchRestaurantVariables
+    >(SEARCH_RESTAURANT);
 
   useEffect(() => {
     const [, query] = location.search.split("?term=");

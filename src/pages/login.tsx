@@ -65,19 +65,17 @@ export const Login = () => {
       //아폴로.ts에서 우리가 만든 전역변수!! static이라 보면됨!
     }
   };
-  const [
-    loginMutationAAAA,
-    { data: loginMutationResult, loading },
-  ] = useMutation<
-    //data안에 loginMutationResult이 있고 안에 쿼리 이름으로 결과가있음(login)
-    loginMutation,
-    loginMutationVariables
-    //useMutation에서 처음은 쓸 쿼리아웃풋타입
-    //두번째는 넣을 변수의 인풋타입!!
-  >(LOGIN_MUTATION, {
-    //로그인이 실행되고 결과값을 onCompleted에 넘겨줄것임!
-    onCompleted, //onCompleted은 정해진 함수임 이름바꾸면안됨!! 속성임!
-  });
+  const [loginMutationAAAA, { data: loginMutationResult, loading }] =
+    useMutation<
+      //data안에 loginMutationResult이 있고 안에 쿼리 이름으로 결과가있음(login)
+      loginMutation,
+      loginMutationVariables
+      //useMutation에서 처음은 쓸 쿼리아웃풋타입
+      //두번째는 넣을 변수의 인풋타입!!
+    >(LOGIN_MUTATION, {
+      //로그인이 실행되고 결과값을 onCompleted에 넘겨줄것임!
+      onCompleted, //onCompleted은 정해진 함수임 이름바꾸면안됨!! 속성임!
+    });
   const onSubmit = () => {
     if (!loading) {
       const { email, password } = getValues();
@@ -114,7 +112,8 @@ export const Login = () => {
           <input
             ref={register({
               required: "Email is required",
-              pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              pattern:
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
             name="email"
             // name 없으면 useForm이 찾질 못한다!!

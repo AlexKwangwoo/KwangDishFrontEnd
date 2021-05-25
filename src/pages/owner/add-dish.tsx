@@ -50,16 +50,11 @@ export const AddDish = () => {
     ],
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState,
-    getValues,
-    setValue,
-  } = useForm<IForm>({
-    //formState는 onChange가 필수이다!
-    mode: "onChange",
-  });
+  const { register, handleSubmit, formState, getValues, setValue } =
+    useForm<IForm>({
+      //formState는 onChange가 필수이다!
+      mode: "onChange",
+    });
 
   // const [uploading, setUploading] = useState(false);
   // const [imageUrl, setImageUrl] = useState("");

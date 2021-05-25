@@ -32,18 +32,13 @@ interface ICreateAccountForm {
 }
 
 export const CreateAccount = () => {
-  const {
-    register,
-    getValues,
-    errors,
-    handleSubmit,
-    formState,
-  } = useForm<ICreateAccountForm>({
-    mode: "onChange",
-    defaultValues: {
-      role: UserRole.Client,
-    },
-  });
+  const { register, getValues, errors, handleSubmit, formState } =
+    useForm<ICreateAccountForm>({
+      mode: "onChange",
+      defaultValues: {
+        role: UserRole.Client,
+      },
+    });
   const history = useHistory();
   const onCompleted = (data: createAccountMutation) => {
     const {
@@ -90,7 +85,8 @@ export const CreateAccount = () => {
           <input
             ref={register({
               required: "Email is required",
-              pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              pattern:
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
             name="email"
             required

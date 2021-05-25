@@ -82,8 +82,9 @@
     "cross-env": "^7.0.3",
     "eslint": "^7.22.0",
     "eslint-config-airbnb-typescript-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "mock-apollo-client": "^1.0.0",
-    "prettier": "^2.2.1",
+    "prettier": "2.3.0",
     "stylelint-config-standard": "^21.0.0"
   },
   "jest": {

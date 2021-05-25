@@ -92,15 +92,10 @@ export const AddRestaurant = () => {
     //새로고침시에 볼수있음!
   });
 
-  const {
-    register,
-    getValues,
-    formState,
-    errors,
-    handleSubmit,
-  } = useForm<IFormProps>({
-    mode: "onChange",
-  });
+  const { register, getValues, formState, errors, handleSubmit } =
+    useForm<IFormProps>({
+      mode: "onChange",
+    });
 
   const [uploading, setUploading] = useState(false);
   const onSubmit = async () => {

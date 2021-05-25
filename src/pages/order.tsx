@@ -47,9 +47,8 @@ interface IParams {
 export const Order = () => {
   const params = useParams<IParams>();
   const { data: userData } = useMe();
-  const [editOrderMutation] = useMutation<editOrder, editOrderVariables>(
-    EDIT_ORDER
-  );
+  const [editOrderMutation] =
+    useMutation<editOrder, editOrderVariables>(EDIT_ORDER);
 
   //GET_ORDER 쿼리와 subscription을 같이 하기위해subscribeToMore 을 씀
   const { data, subscribeToMore } = useQuery<getOrder, getOrderVariables>(

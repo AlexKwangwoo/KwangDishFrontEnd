@@ -5,5 +5,7 @@
     "configurations": [],
     "compounds": []
   },
+  "html.format.extraLiners": "",
+  "editor.formatOnSave": true,
   
 }
