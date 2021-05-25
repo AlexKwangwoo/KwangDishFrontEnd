@@ -199,3 +199,5 @@ npm install subscriptions-transport-ws
 
 1. apollo에서 header에 토큰을 붙여주거나 웹소켓의 connection.context에 토큰을 넣어줌!
    (\*백앤드만 만질때는 그래프큐엘열어서header 넣어줄수있었음!)
+
+2. npx browserslist --update-db 업데이트돼서 이거 해줘야 배포됨!
