@@ -2,6 +2,10 @@
 git push origin master 하면
 netlify 에서 로그인후 elegant-vbarahamigira~~ 들어간다
 Stop auto publishing 안누르면 푸시할때마다 디폴로이 된다!
+Build Command는 CI= npm run build 이여야한다 넷리파이 어플만들때!!
+
+--시작방법
+npm run start
 
 - npx cypress open (npm run start 한뒤에 하면된다!!)
 - multer 업로드 기능을 할 수 있다!
@@ -21,7 +25,7 @@ Stop auto publishing 안누르면 푸시할때마다 디폴로이 된다!
   찾아줄수있게된다!
 
 https://happist.com/568746/%EA%B5%AC%EA%B8%80%EB%A7%B5-%ED%99%9C%EC%9A%A9%EB%B2%95-%EA%B5%AC%EA%B8%80%EB%A7%B5-api-key-%EB%B0%9C%EA%B8%89%EB%B0%A9%EB%B2%95
-에서 구글맵 결제화면 방법있음
+에서 구글맵 결제화면 방법있음..
 
 Tailwind의 screen은 640px부터 시작된다!
 아무것도 적지않으면 sm화면이라고 보면된다.. px-5면 작은사이즈일때 패딩5주고
