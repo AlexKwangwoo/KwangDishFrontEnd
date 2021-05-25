@@ -1,9 +1,7 @@
 ----배포 방법----
-git push origin master 하면 
+git push origin master 하면
 netlify 에서 로그인후 elegant-vbarahamigira~~ 들어간다
 Stop auto publishing 안누르면 푸시할때마다 디폴로이 된다!
-
-
 
 - npx cypress open (npm run start 한뒤에 하면된다!!)
 - multer 업로드 기능을 할 수 있다!
@@ -80,6 +78,7 @@ export interface loginMutationVariables {
 loginInput: LoginInput;
 }
 --
+
 ---
 
 로컬스토리지 이용!!
